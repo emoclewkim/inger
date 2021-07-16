@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
+import com.ssafy.api.request.UserRegisterUpdateReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.response.UserRes;
 import com.ssafy.api.service.UserService;
@@ -80,5 +83,22 @@ public class UserController {
 		User user = userService.getUserByUserId(userId);
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
+	}
+	
+	@PatchMapping("/{userId}")
+	public ResponseEntity<? extends BaseResponseBody> registUser(@PathVariable String userId, @RequestBody UserRegisterUpdateReq registerInfo){
+		User user = userService.updateUserByUserId(userId, registerInfo);
+		
+		if(user.getId()==null) {
+			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<? extends BaseResponseBody> deleteUser(@PathVariable String userId){
+
+		return null;
 	}
 }
