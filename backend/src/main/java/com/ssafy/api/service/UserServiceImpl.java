@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
 	public User updateUserByUserId(String userId, UserRegisterUpdateReq registerInfo) {
 		User user = userRepository.findByUserId(userId).get();
 		
+		if(user.getId()==null) {
+			return null;
+		}
+		
 		user.setDepartment(registerInfo.getDepartment());
 		user.setPosition(registerInfo.getPosition());
 		user.setName(registerInfo.getName());

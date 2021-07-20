@@ -89,7 +89,7 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseBody> registUser(@PathVariable String userId, @RequestBody UserRegisterUpdateReq registerInfo){
 		User user = userService.updateUserByUserId(userId, registerInfo);
 		
-		if(user.getId()==null) {
+		if(user==null) {
 			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
 		}
 		
