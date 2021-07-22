@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Conference_history extends BaseEntity {
+public class User_history extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	User user;
