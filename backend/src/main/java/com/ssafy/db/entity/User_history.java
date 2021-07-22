@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +21,8 @@ public class User_history extends BaseEntity {
 	@JoinColumn(name = "conference_id", nullable = false)
 	Conference conference;
 
-	SmallIntTypeDescriptor action;
-	Timestamp inserted_time;
+	Timestamp enter_time;
+	Timestamp end_time;
+	int rest_time;
+	
 }
