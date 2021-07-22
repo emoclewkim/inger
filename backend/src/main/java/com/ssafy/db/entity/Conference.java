@@ -13,18 +13,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Conference extends BaseEntity {
-	@ManyToOne
-	@JoinColumn(name = "owner_id", nullable = false)
-	User user;
 
 	@ManyToOne
-	@JoinColumn(name = "category", nullable = false)
+	@JoinColumn(name = "category_id", nullable = false)
 	Category category;
+	
+	int now_people;
+	int max_people;
+	Timestamp start_room;
+	Timestamp end_room;
 
-	Timestamp call_start_time;
-	Timestamp call_end_time;
-	String thumbnail_url;
-	String title;
-	String description;
-	Boolean is_active;
 }
