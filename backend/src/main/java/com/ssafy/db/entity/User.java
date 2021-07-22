@@ -14,13 +14,14 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class User extends BaseEntity{
-    String position;
-    String department;
-    String name;
-    String userId;
+public class User extends BaseEntity {
+	String position;
+	String department;
+	String name;
+	String userId;
+	Boolean is_admin;
 
-    @JsonIgnore
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    String password;
+	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	String password;
 }
