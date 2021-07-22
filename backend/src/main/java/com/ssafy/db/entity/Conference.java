@@ -18,8 +18,8 @@ public class Conference extends BaseEntity {
 	User user;
 
 	@ManyToOne
-	@JoinColumn(name = "conference_category", nullable = false)
-	Conference_category conference_category;
+	@JoinColumn(name = "category", nullable = false)
+	Category category;
 
 	Timestamp call_start_time;
 	Timestamp call_end_time;
