@@ -6,7 +6,7 @@ height: 50px;
 & .appbar {
     width: 100%;
     height: 50px;
-    background-color: transparent;
+    background-color: #1E1F26;
     box-shadow: none;
 }
 & .header-grid {

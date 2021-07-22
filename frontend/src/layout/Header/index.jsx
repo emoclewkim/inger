@@ -16,7 +16,6 @@ const Header = () => {
     <AppBar
           position="fixed"
           className='appbar'
-          color="transparent"
         >
           <Grid container justify="space-between" alignItems="center"
           className='header-grid'>

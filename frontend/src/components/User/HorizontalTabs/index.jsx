@@ -1,13 +1,21 @@
-import { Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab, Container, Button, Grid } from '@material-ui/core';
 import Wrapper from './styles';
 import MyCalendar from '../MyCalendar';
+import MyTodolist from '../MyTodolist';
 
 export default function HorizontalTabs() {
     const labels = ['Calendar', 'Todo-list'];
     return (
         <Wrapper>
-        <Tabs orientation="horizontal"
-            variant="scrollable">
+            <Container className="tab-container"
+                style={{
+                    alignItems: 'center'
+                }}>
+                <Grid container justify="space-between">
+                    <Grid item>
+                    <Tabs orientation="horizontal"
+                variant="scrollable"
+            className="tabs">
             {labels.map((x, index) => {
                 return (
                     <Tab
@@ -21,8 +29,34 @@ export default function HorizontalTabs() {
                 )
             })
             }
-        </Tabs>
-            <MyCalendar />
+                </Tabs>
+                    </Grid>
+                    <Grid item>
+                    <Button
+                    className="enter-button"
+                    variant="outlined"
+                            style={{
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                    backgroundColor: '#E96F02'
+                }}>
+                    입장하기
+                </Button>
+                    </Grid>
+                </Grid>
+                </Container>
+            <Container
+                style={{
+                alignItems: 'center'
+            }}>
+                <MyCalendar />
+            </Container>
+            <Container
+                style={{
+                alignItems: 'center'
+            }}>
+                <MyTodolist />
+                </Container>
         </Wrapper>
     );
 };
