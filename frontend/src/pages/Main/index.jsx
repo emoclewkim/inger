@@ -1,5 +1,5 @@
 import Layout from '../../layout';
-import HorizontalTabs from '../../components/User/HorizontalTabs';
+import HorizontalTabs from '../../components/Main/HorizontalTabs';
 
 const Main = () => {
   return (

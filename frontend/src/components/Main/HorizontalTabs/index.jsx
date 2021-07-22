@@ -1,4 +1,4 @@
-import { Tabs, Tab, Container, Button, Grid } from '@material-ui/core';
+import { Tabs, Tab, Container, Button, Grid, Divider } from '@material-ui/core';
 import Wrapper from './styles';
 import MyCalendar from '../MyCalendar';
 import MyTodolist from '../MyTodolist';
@@ -51,6 +51,7 @@ export default function HorizontalTabs() {
             }}>
                 <MyCalendar />
             </Container>
+            <Divider/>
             <Container
                 style={{
                 alignItems: 'center'
