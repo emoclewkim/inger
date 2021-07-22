@@ -29,7 +29,6 @@ public class User extends BaseEntity {
 
 	String token;
 	String name;
-	Integer age;
 
 	@Column(columnDefinition = "boolean default false")
 	Boolean is_open;
