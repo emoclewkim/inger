@@ -1,10 +1,11 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { createStore } from "redux";
 
-import Main from './pages/Main'
+import Main from "./pages/Main";
 
-import './App.css'
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <>
       <BrowserRouter>
@@ -13,7 +14,7 @@ function App() {
         </Switch>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
 export default App;
