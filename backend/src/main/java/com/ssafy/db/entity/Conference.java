@@ -1,10 +1,9 @@
 package com.ssafy.db.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,18 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Conference extends BaseEntity {
-	@ManyToOne
-	@JoinColumn(name = "owner_id", nullable = false)
-	User user;
-
-	@ManyToOne
-	@JoinColumn(name = "category", nullable = false)
-	Category category;
-
-	Timestamp call_start_time;
-	Timestamp call_end_time;
-	String thumbnail_url;
-	String title;
-	String description;
-	Boolean is_active;
+	Integer category;
+	String session;
+	Integer now_people;
+	Integer max_people;
+	Date start_room_date;
+	Time start_room_time;
+	Date end_room_date;
+	Time end_room_time;
 }

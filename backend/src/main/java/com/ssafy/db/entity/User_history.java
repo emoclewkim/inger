@@ -1,12 +1,11 @@
 package com.ssafy.db.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,10 @@ public class User_history extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "conference_id", nullable = false)
 	Conference conference;
-
-	SmallIntTypeDescriptor action;
-	Timestamp inserted_time;
+	
+	Integer type;
+	Date enter_date;
+	Time enter_time;
+	Date exit_date;
+	Time exit_time;
 }

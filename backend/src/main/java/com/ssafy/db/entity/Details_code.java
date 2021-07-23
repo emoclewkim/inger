@@ -1,7 +1,5 @@
 package com.ssafy.db.entity;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,12 +10,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Calender extends BaseEntity {
+public class Details_code extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	User user;
-
-	Date date;
-	String promise;
-	String diary;
+	@JoinColumn(name = "type", nullable = false)
+	Common_code commonCode;
+	
+	String name;
 }

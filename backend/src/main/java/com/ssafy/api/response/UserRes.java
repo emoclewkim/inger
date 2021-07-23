@@ -23,9 +23,9 @@ public class UserRes{
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
-		res.setUserId(user.getUserId());
-		res.setPosition(user.getPosition());
-		res.setDepartment(user.getDepartment());
+//		res.setUserId(user.getUserId());
+//		res.setPosition(user.getPosition());
+//		res.setDepartment(user.getDepartment());
 		res.setName(user.getName());
 		return res;
 	}
