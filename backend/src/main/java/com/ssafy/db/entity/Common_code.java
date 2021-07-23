@@ -1,6 +1,7 @@
 package com.ssafy.db.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Category extends BaseEntity{
-	String category_name;
+public class Common_code extends BaseEntity {
+	String kind;
 }

@@ -1,6 +1,7 @@
 package com.ssafy.db.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,9 +21,10 @@ public class User_history extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "conference_id", nullable = false)
 	Conference conference;
-
-	Timestamp enter_time;
-	Timestamp end_time;
-	int rest_time;
 	
+	int type;
+	Date enter_date;
+	Time enter_time;
+	Date exit_date;
+	Time exit_time;
 }
