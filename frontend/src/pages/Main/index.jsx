@@ -1,10 +1,11 @@
 import Layout from '../../layout';
+import HorizontalTabs from '../../components/Main/HorizontalTabs';
 
 const Main = () => {
   return (
-    <Layout>
-      <div>Main</div>
-    </Layout>
+      <Layout>
+        <HorizontalTabs/>
+      </Layout>
   );
 };
 
