@@ -12,12 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Conference extends BaseEntity {
-	int category;
+	Integer category;
 	String session;
-	int now_people;
-	int max_people;
+	Integer now_people;
+	Integer max_people;
 	Date start_room_date;
-	Date end_room_date;
 	Time start_room_time;
+	Date end_room_date;
 	Time end_room_time;
 }

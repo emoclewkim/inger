@@ -16,13 +16,10 @@ public class User extends BaseEntity {
 
 	String token;
 	String name;
-	
+
 	@Column(columnDefinition = "boolean default false")
 	Boolean is_open;
 
-	@Column(columnDefinition = "boolean default false")
-	Boolean is_admin;
-	
-	int usercode;
-	int category;
+	Integer usercode;
+	Integer category;
 }

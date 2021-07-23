@@ -19,7 +19,7 @@ public class Todolist extends BaseEntity {
 	User user;
 	
 	Date date;
-//	int index;
+	Integer index;
 	String todo;
 	
 	@Column(columnDefinition = "boolean default false")

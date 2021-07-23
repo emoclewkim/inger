@@ -22,7 +22,7 @@ public class User_history extends BaseEntity {
 	@JoinColumn(name = "conference_id", nullable = false)
 	Conference conference;
 	
-	int type;
+	Integer type;
 	Date enter_date;
 	Time enter_time;
 	Date exit_date;
