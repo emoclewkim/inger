@@ -12,8 +12,8 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserRegisterPostRequest")
 public class UserRegisterPostReq {
-	@ApiModelProperty(name="카카오 API 서비스 연결 토큰", example="xxxx")
-	String token;
+	@ApiModelProperty(name="카카오 API 서비스 연결 아이디", example="xxxx")
+	String kakao_idnum;
 	@ApiModelProperty(name="유저 Name", example="your_name")
 	String name;
 	@ApiModelProperty(name="프로필 공개 여부", example="false")

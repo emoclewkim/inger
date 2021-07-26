@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
 		User user = new User();
-		user.setToken(userRegisterInfo.getToken());
+		user.setKakao_idnum(userRegisterInfo.getKakao_idnum());
 		user.setName(userRegisterInfo.getName());
 		user.setIs_open(userRegisterInfo.getIs_open());
 		user.setUsercode(userRegisterInfo.getUsercode());

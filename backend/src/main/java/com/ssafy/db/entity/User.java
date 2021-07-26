@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @Setter
 public class User extends BaseEntity {
 
-	String token; // 카카오톡 API 서비스 연결 토큰
+	String kakao_idnum; // 카카오톡 API 서비스 연결 ID
 	String name;
 
 	@Column(columnDefinition = "boolean default false")
