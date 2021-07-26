@@ -28,9 +28,9 @@ public class QUser extends EntityPathBase<User> {
 
     public final BooleanPath is_open = createBoolean("is_open");
 
-    public final StringPath name = createString("name");
+    public final StringPath kakao_idnum = createString("kakao_idnum");
 
-    public final StringPath token = createString("token");
+    public final StringPath name = createString("name");
 
     public final NumberPath<Integer> usercode = createNumber("usercode", Integer.class);
 

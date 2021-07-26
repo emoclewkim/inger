@@ -29,11 +29,11 @@ public class QTodolist extends EntityPathBase<Todolist> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
-    public final NumberPath<Integer> index = createNumber("index", Integer.class);
-
     public final BooleanPath is_finish = createBoolean("is_finish");
 
     public final StringPath todo = createString("todo");
+
+    public final NumberPath<Integer> todoindex = createNumber("todoindex", Integer.class);
 
     public final QUser user;
 
