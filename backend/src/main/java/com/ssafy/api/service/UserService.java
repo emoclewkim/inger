@@ -14,5 +14,5 @@ public interface UserService {
 
 	Optional<User> createUser(UserRegisterPostReq userRegisterPostReq);
 	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
-//	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
+	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
 }

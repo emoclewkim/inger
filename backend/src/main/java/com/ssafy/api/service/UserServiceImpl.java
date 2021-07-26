@@ -45,19 +45,18 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-//	@Override
-//	@Transactional
-//	public User updateUserByKakao_idnum(String kakao_idnum, UserRegisterUpdateReq registerInfo) {
-//		User user = userRepository.findByKakao_idnum(kakao_idnum).get();
-//		
-//		if (user.getId() == null) {
-//			return null;
-//		}
-//
-//		user.setDepartment(registerInfo.getDepartment());
-//		user.setPosition(registerInfo.getPosition());
-//		user.setName(registerInfo.getName());
-//		return user;
-//	}
+	@Override
+	@Transactional
+	public User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo) {
+		User user = userRepository.findByKakaoIdNum(kakaoIdNum).get();
+		
+		if (user.getId() == null) {
+			return null;
+		}
+		user.setCategory(registerInfo.getCategory());
+		user.setIsOpen(registerInfo.getIsOpen());
+		user.setName(registerInfo.getName());
+		return user;
+	}
 
 }

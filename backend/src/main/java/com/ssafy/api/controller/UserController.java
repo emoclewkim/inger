@@ -89,20 +89,20 @@ public class UserController {
 		return ResponseEntity.status(200).body(UserRes.of(user.get()));
 	}
 //	
-//	@PatchMapping("/{userId}")
-//	public ResponseEntity<? extends BaseResponseBody> registUser(@PathVariable String userId, @RequestBody UserRegisterUpdateReq registerInfo){
-//		User user = userService.updateUserByUserId(userId, registerInfo);
-//		
-//		if(user==null) {
-//			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
-//		}
-//		
-//		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-//	}
-//	
-//	@DeleteMapping("/{userId}")
-//	public ResponseEntity<? extends BaseResponseBody> deleteUser(@PathVariable String userId){
-//
-//		return null;
-//	}
+	@PatchMapping("/{kakaoIdNum}")
+	public ResponseEntity<? extends BaseResponseBody> registUser(@PathVariable String kakaoIdNum, @RequestBody UserRegisterUpdateReq registerInfo){
+		User user = userService.updateUserByKakaoIdNum(kakaoIdNum, registerInfo);
+		
+		if(user==null) {
+			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<? extends BaseResponseBody> deleteUser(@PathVariable String userId){
+
+		return null;
+	}
 }
