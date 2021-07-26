@@ -100,8 +100,8 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
-	@DeleteMapping("/{userId}")
-	public ResponseEntity<? extends BaseResponseBody> deleteUser(@PathVariable String userId){
+	@DeleteMapping("/{kakaoIdNum}")
+	public ResponseEntity<? extends BaseResponseBody> deleteUser(@PathVariable String kakaoIdNum){
 
 		return null;
 	}
