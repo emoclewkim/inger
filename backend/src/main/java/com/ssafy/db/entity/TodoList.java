@@ -13,9 +13,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Todolist extends BaseEntity {
+public class TodoList extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	User user;
 	
 	Date date;

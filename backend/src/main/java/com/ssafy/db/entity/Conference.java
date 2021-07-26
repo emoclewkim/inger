@@ -14,10 +14,10 @@ import lombok.Setter;
 public class Conference extends BaseEntity {
 	Integer category;
 	String session;
-	Integer now_people;
-	Integer max_people;
-	Date start_room_date;
-	Time start_room_time;
-	Date end_room_date;
-	Time end_room_time;
+	Integer nowPeople;
+	Integer maxPeople;
+	Date startRoomDate;
+	Time startRoomTime;
+	Date endRoomDate;
+	Time endRoomTime;
 }
