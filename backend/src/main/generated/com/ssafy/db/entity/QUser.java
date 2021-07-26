@@ -26,13 +26,13 @@ public class QUser extends EntityPathBase<User> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
-    public final BooleanPath is_open = createBoolean("is_open");
+    public final BooleanPath isOpen = createBoolean("isOpen");
 
-    public final StringPath kakao_idnum = createString("kakao_idnum");
+    public final StringPath kakaoIdNum = createString("kakaoIdNum");
 
     public final StringPath name = createString("name");
 
-    public final NumberPath<Integer> usercode = createNumber("usercode", Integer.class);
+    public final NumberPath<Integer> usesrcode = createNumber("usesrcode", Integer.class);
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

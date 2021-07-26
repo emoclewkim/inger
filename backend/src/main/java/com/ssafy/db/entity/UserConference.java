@@ -10,12 +10,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User_conference extends BaseEntity{
+public class UserConference extends BaseEntity{
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	User user;
 
 	@ManyToOne
-	@JoinColumn(name = "conference_id", nullable = false)
+	@JoinColumn(name = "conferenceId", nullable = false)
 	Conference conference;
 }

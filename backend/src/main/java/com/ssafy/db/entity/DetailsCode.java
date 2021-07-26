@@ -10,10 +10,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Details_code extends BaseEntity {
+public class DetailsCode extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "type", nullable = false)
-	Common_code commonCode;
+	CommonCode commonCode;
 	
 	String name;
 }

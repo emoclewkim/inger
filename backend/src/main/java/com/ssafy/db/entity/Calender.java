@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Calender extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	User user;
 
 	Date date;
