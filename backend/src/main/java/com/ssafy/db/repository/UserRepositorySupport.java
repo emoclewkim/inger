@@ -18,9 +18,9 @@ public class UserRepositorySupport {
     private JPAQueryFactory jpaQueryFactory;
     QUser qUser = QUser.user;
 
-    public Optional<User> findUserByKakao_idnum(String kakao_idnum) {
+    public Optional<User> findUserByKakaoIdNum(String kakaoIdNum) {
         User user = jpaQueryFactory.select(qUser).from(qUser)
-                .where(qUser.kakaoIdNum.eq(kakao_idnum)).fetchOne();
+                .where(qUser.kakaoIdNum.eq(kakaoIdNum)).fetchOne();
         if(user == null) return Optional.empty();
         return Optional.ofNullable(user);
     }
