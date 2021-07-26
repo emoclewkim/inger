@@ -12,10 +12,11 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserRegisterUpdateReq")
 public class UserRegisterUpdateReq {
-	@ApiModelProperty(name="유저 Department", example="your_department")
-	String department;
-	@ApiModelProperty(name="유저 Name", example="your_name")
+	@ApiModelProperty(name="유저 Category", example="101")
+	Integer category;
+	@ApiModelProperty(name="다짐 공개 여부", example="false")
+	Boolean isOpen;
+	@ApiModelProperty(name="닉네임", example="nickname")
 	String name;
-	@ApiModelProperty(name="유저 Position", example="your_position")
-	String position;
+
 }

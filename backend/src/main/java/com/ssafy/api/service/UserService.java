@@ -1,5 +1,7 @@
 package com.ssafy.api.service;
 
+import java.util.Optional;
+
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.UserRegisterUpdateReq;
 import com.ssafy.db.entity.User;
@@ -9,7 +11,8 @@ import com.ssafy.db.entity.User;
  */
 
 public interface UserService {
-//	User createUser(UserRegisterPostReq userRegisterInfo);
-//	User getUserByKakaoIdNum(String kakaoIdNum);
-//	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
+
+	Optional<User> createUser(UserRegisterPostReq userRegisterPostReq);
+	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
+	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
 }

@@ -20,6 +20,6 @@ public class User extends BaseEntity {
 	@Column(columnDefinition = "boolean default false")
 	Boolean isOpen;
 
-	Integer usesrcode;
+	Integer usercode;
 	Integer category;
 }
