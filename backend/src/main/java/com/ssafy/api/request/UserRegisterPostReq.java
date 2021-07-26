@@ -18,8 +18,6 @@ public class UserRegisterPostReq {
 	String name;
 	@ApiModelProperty(name="프로필 공개 여부", example="false")
 	Boolean isOpen;
-	@ApiModelProperty(name="회원 세부코드", example="101")
-	Integer usercode;
 	@ApiModelProperty(name="카테고리 세부코드", example="201")
 	Integer category;
 }

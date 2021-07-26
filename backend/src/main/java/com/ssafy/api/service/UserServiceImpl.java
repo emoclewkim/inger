@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService {
 	UserRepositorySupport userRepositorySupport;
 
 	@Override
-	public Optional<User> createUser(String kakaoIdNum) {
+	public Optional<User> createUser(UserRegisterPostReq userRegisterPostReq) {
 		User user = new User();
-		user.setKakaoIdNum(kakaoIdNum);
-		user.setName("1234");
-		user.setIsOpen(false);
-		user.setUsercode(101);
-		user.setCategory(101);
+		user.setKakaoIdNum(userRegisterPostReq.getKakaoIdNum());
+		user.setName(userRegisterPostReq.getName());
+		user.setIsOpen(userRegisterPostReq.getIsOpen());
+		user.setUsercode(101); // 기본값으로 일반 회원 코드 사용
+		user.setCategory(userRegisterPostReq.getCategory());
 		return Optional.ofNullable(userRepository.save(user));
 	}
 
