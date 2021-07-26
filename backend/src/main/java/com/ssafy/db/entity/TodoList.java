@@ -23,5 +23,5 @@ public class TodoList extends BaseEntity {
 	String todo;
 	
 	@Column(columnDefinition = "boolean default false")
-	Boolean is_finish;
+	Boolean isFinish;
 }

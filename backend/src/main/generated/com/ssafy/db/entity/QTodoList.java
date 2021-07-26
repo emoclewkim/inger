@@ -29,7 +29,7 @@ public class QTodoList extends EntityPathBase<TodoList> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
-    public final BooleanPath is_finish = createBoolean("is_finish");
+    public final BooleanPath isFinish = createBoolean("isFinish");
 
     public final StringPath todo = createString("todo");
 
