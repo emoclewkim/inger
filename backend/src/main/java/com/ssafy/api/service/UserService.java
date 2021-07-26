@@ -12,7 +12,7 @@ import com.ssafy.db.entity.User;
 
 public interface UserService {
 
-	User createUser(String kakaoIdNum);
+	Optional<User> createUser(String kakaoIdNum);
 	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
 //	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
 }

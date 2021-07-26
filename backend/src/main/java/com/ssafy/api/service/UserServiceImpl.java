@@ -28,21 +28,20 @@ public class UserServiceImpl implements UserService {
 	UserRepositorySupport userRepositorySupport;
 
 	@Override
-	public User createUser(String kakaoIdNum) {
+	public Optional<User> createUser(String kakaoIdNum) {
 		User user = new User();
 		user.setKakaoIdNum(kakaoIdNum);
 		user.setName("1234");
 		user.setIsOpen(false);
 		user.setUsercode(101);
 		user.setCategory(101);
-		return userRepository.save(user);
+		return Optional.ofNullable(userRepository.save(user));
 	}
 
 	@Override
 	public Optional<User> getUserByKakaoIdNum(String kakaoIdNum) {
 		// 디비에 유저 정보 조회 (kakaoIdNum 를 통한 조회).
 		Optional<User> user = userRepositorySupport.findUserByKakaoIdNum(kakaoIdNum);
-		System.out.println("userService Impl : " + user);
 		return user;
 	}
 
