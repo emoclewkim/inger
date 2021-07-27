@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QUserConference is a Querydsl query type for UserConference
+ * QUser_conference is a Querydsl query type for User_conference
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QUserConference extends EntityPathBase<UserConference> {
+public class QUser_conference extends EntityPathBase<User_conference> {
 
-    private static final long serialVersionUID = 1175538569L;
+    private static final long serialVersionUID = 1147320846L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QUserConference userConference = new QUserConference("userConference");
+    public static final QUser_conference user_conference = new QUser_conference("user_conference");
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
@@ -31,23 +31,23 @@ public class QUserConference extends EntityPathBase<UserConference> {
 
     public final QUser user;
 
-    public QUserConference(String variable) {
-        this(UserConference.class, forVariable(variable), INITS);
+    public QUser_conference(String variable) {
+        this(User_conference.class, forVariable(variable), INITS);
     }
 
-    public QUserConference(Path<? extends UserConference> path) {
+    public QUser_conference(Path<? extends User_conference> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QUserConference(PathMetadata metadata) {
+    public QUser_conference(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QUserConference(PathMetadata metadata, PathInits inits) {
-        this(UserConference.class, metadata, inits);
+    public QUser_conference(PathMetadata metadata, PathInits inits) {
+        this(User_conference.class, metadata, inits);
     }
 
-    public QUserConference(Class<? extends UserConference> type, PathMetadata metadata, PathInits inits) {
+    public QUser_conference(Class<? extends User_conference> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.conference = inits.isInitialized("conference") ? new QConference(forProperty("conference")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;

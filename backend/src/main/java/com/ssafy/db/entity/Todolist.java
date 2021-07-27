@@ -13,15 +13,15 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class TodoList extends BaseEntity {
+public class Todolist extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "userId", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	User user;
 	
 	Date date;
-	Integer todoindex;
+	Integer index;
 	String todo;
 	
 	@Column(columnDefinition = "boolean default false")
-	Boolean isFinish;
+	Boolean is_finish;
 }

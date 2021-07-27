@@ -16,14 +16,16 @@ import lombok.Setter;
 @ApiModel("UserResponse")
 public class UserRes{
 	@ApiModelProperty(name="User ID")
-	Integer category;
-	Boolean isOpen;
+	String userId;
+	String position;
+    String department;
 	String name;
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
-		res.setCategory(user.getCategory());
-		res.setIsOpen(user.getIsOpen());
+//		res.setUserId(user.getUserId());
+//		res.setPosition(user.getPosition());
+//		res.setDepartment(user.getDepartment());
 		res.setName(user.getName());
 		return res;
 	}

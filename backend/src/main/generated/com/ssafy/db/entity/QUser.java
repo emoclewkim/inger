@@ -26,11 +26,11 @@ public class QUser extends EntityPathBase<User> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
-    public final BooleanPath isOpen = createBoolean("isOpen");
-
-    public final StringPath kakaoIdNum = createString("kakaoIdNum");
+    public final BooleanPath is_open = createBoolean("is_open");
 
     public final StringPath name = createString("name");
+
+    public final StringPath token = createString("token");
 
     public final NumberPath<Integer> usercode = createNumber("usercode", Integer.class);
 
