@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QCommonCode is a Querydsl query type for CommonCode
+ * QCommon_code is a Querydsl query type for Common_code
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QCommonCode extends EntityPathBase<CommonCode> {
+public class QCommon_code extends EntityPathBase<Common_code> {
 
-    private static final long serialVersionUID = -169209926L;
+    private static final long serialVersionUID = -925028673L;
 
-    public static final QCommonCode commonCode = new QCommonCode("commonCode");
+    public static final QCommon_code common_code = new QCommon_code("common_code");
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
@@ -26,16 +26,16 @@ public class QCommonCode extends EntityPathBase<CommonCode> {
 
     public final StringPath kind = createString("kind");
 
-    public QCommonCode(String variable) {
-        super(CommonCode.class, forVariable(variable));
+    public QCommon_code(String variable) {
+        super(Common_code.class, forVariable(variable));
     }
 
-    public QCommonCode(Path<? extends CommonCode> path) {
+    public QCommon_code(Path<? extends Common_code> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QCommonCode(PathMetadata metadata) {
-        super(CommonCode.class, metadata);
+    public QCommon_code(PathMetadata metadata) {
+        super(Common_code.class, metadata);
     }
 
 }

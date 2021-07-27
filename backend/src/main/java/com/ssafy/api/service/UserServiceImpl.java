@@ -1,7 +1,5 @@
 package com.ssafy.api.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,47 +14,55 @@ import com.ssafy.db.repository.UserRepositorySupport;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
+ *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
  */
 @Service("userService")
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
-
+	
 	@Autowired
 	UserRepositorySupport userRepositorySupport;
-
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	@Override
-	public Optional<User> createUser(UserRegisterPostReq userRegisterPostReq) {
+	public User createUser(UserRegisterPostReq userRegisterInfo) {
 		User user = new User();
-		user.setKakaoIdNum(userRegisterPostReq.getKakaoIdNum());
-		user.setName(userRegisterPostReq.getName());
-		user.setIsOpen(userRegisterPostReq.getIsOpen());
-		user.setUsercode(101); // 기본값으로 일반 회원 코드 사용
-		user.setCategory(userRegisterPostReq.getCategory());
-		return Optional.ofNullable(userRepository.save(user));
+//		user.setUserId(userRegisterInfo.getId());
+//		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
+//		user.setPassword(passwordEncoder.encode(userRegisterInfo.getPassword()));
+//		user.setDepartment(userRegisterInfo.getDepartment());
+//		user.setName(userRegisterInfo.getName());
+//		user.setPosition(userRegisterInfo.getPosition());
+		return userRepository.save(user);
 	}
 
 	@Override
-	public Optional<User> getUserByKakaoIdNum(String kakaoIdNum) {
-		// 디비에 유저 정보 조회 (kakaoIdNum 를 통한 조회).
-		Optional<User> user = userRepositorySupport.findUserByKakaoIdNum(kakaoIdNum);
+	public User getUserByUserId(String userId) {
+		// 디비에 유저 정보 조회 (userId 를 통한 조회).
+//		User user = userRepositorySupport.findUserByUserId(userId).get();
+		User user = new User();
 		return user;
 	}
 
 	@Override
 	@Transactional
-	public User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo) {
-		User user = userRepository.findByKakaoIdNum(kakaoIdNum).get();
+	public User updateUserByUserId(String userId, UserRegisterUpdateReq registerInfo) {
+//		User user = userRepository.findByUserId(userId).get();
+		User user = new User();
 		
-		if (user.getId() == null) {
+		if(user.getId()==null) {
 			return null;
 		}
-		user.setCategory(registerInfo.getCategory());
-		user.setIsOpen(registerInfo.getIsOpen());
+		
+//		user.setDepartment(registerInfo.getDepartment());
+//		user.setPosition(registerInfo.getPosition());
 		user.setName(registerInfo.getName());
 		return user;
 	}
-
+	
+	
 }

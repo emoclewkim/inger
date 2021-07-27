@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QTodoList is a Querydsl query type for TodoList
+ * QTodolist is a Querydsl query type for Todolist
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QTodoList extends EntityPathBase<TodoList> {
+public class QTodolist extends EntityPathBase<Todolist> {
 
-    private static final long serialVersionUID = -1283976250L;
+    private static final long serialVersionUID = -1283022938L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QTodoList todoList = new QTodoList("todoList");
+    public static final QTodolist todolist = new QTodolist("todolist");
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
@@ -29,31 +29,31 @@ public class QTodoList extends EntityPathBase<TodoList> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
-    public final BooleanPath isFinish = createBoolean("isFinish");
+    public final NumberPath<Integer> index = createNumber("index", Integer.class);
+
+    public final BooleanPath is_finish = createBoolean("is_finish");
 
     public final StringPath todo = createString("todo");
 
-    public final NumberPath<Integer> todoindex = createNumber("todoindex", Integer.class);
-
     public final QUser user;
 
-    public QTodoList(String variable) {
-        this(TodoList.class, forVariable(variable), INITS);
+    public QTodolist(String variable) {
+        this(Todolist.class, forVariable(variable), INITS);
     }
 
-    public QTodoList(Path<? extends TodoList> path) {
+    public QTodolist(Path<? extends Todolist> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QTodoList(PathMetadata metadata) {
+    public QTodolist(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QTodoList(PathMetadata metadata, PathInits inits) {
-        this(TodoList.class, metadata, inits);
+    public QTodolist(PathMetadata metadata, PathInits inits) {
+        this(Todolist.class, metadata, inits);
     }
 
-    public QTodoList(Class<? extends TodoList> type, PathMetadata metadata, PathInits inits) {
+    public QTodolist(Class<? extends Todolist> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
     }
