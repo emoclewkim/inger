@@ -1,5 +1,7 @@
 package com.ssafy.db.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,10 +12,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Details_code extends BaseEntity {
+public class todoListDetail extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "type", nullable = false)
-	Common_code commonCode;
-	
-	String name;
+	@JoinColumn(name = "todoId", nullable = false)
+	TodoList todoList;
+
+	String detail;
+	Boolean isFinish;
 }

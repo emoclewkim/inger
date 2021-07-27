@@ -11,28 +11,28 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QUser_history is a Querydsl query type for User_history
+ * QUserHistory is a Querydsl query type for UserHistory
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QUser_history extends EntityPathBase<User_history> {
+public class QUserHistory extends EntityPathBase<UserHistory> {
 
-    private static final long serialVersionUID = -899685150L;
+    private static final long serialVersionUID = 1625308487L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QUser_history user_history = new QUser_history("user_history");
+    public static final QUserHistory userHistory = new QUserHistory("userHistory");
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
     public final QConference conference;
 
-    public final DatePath<java.sql.Date> enter_date = createDate("enter_date", java.sql.Date.class);
+    public final DatePath<java.sql.Date> enterDate = createDate("enterDate", java.sql.Date.class);
 
-    public final TimePath<java.sql.Time> enter_time = createTime("enter_time", java.sql.Time.class);
+    public final TimePath<java.sql.Time> enterTime = createTime("enterTime", java.sql.Time.class);
 
-    public final DatePath<java.sql.Date> exit_date = createDate("exit_date", java.sql.Date.class);
+    public final DatePath<java.sql.Date> exitDate = createDate("exitDate", java.sql.Date.class);
 
-    public final TimePath<java.sql.Time> exit_time = createTime("exit_time", java.sql.Time.class);
+    public final TimePath<java.sql.Time> exitTime = createTime("exitTime", java.sql.Time.class);
 
     //inherited
     public final NumberPath<Long> id = _super.id;
@@ -41,23 +41,23 @@ public class QUser_history extends EntityPathBase<User_history> {
 
     public final QUser user;
 
-    public QUser_history(String variable) {
-        this(User_history.class, forVariable(variable), INITS);
+    public QUserHistory(String variable) {
+        this(UserHistory.class, forVariable(variable), INITS);
     }
 
-    public QUser_history(Path<? extends User_history> path) {
+    public QUserHistory(Path<? extends UserHistory> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QUser_history(PathMetadata metadata) {
+    public QUserHistory(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QUser_history(PathMetadata metadata, PathInits inits) {
-        this(User_history.class, metadata, inits);
+    public QUserHistory(PathMetadata metadata, PathInits inits) {
+        this(UserHistory.class, metadata, inits);
     }
 
-    public QUser_history(Class<? extends User_history> type, PathMetadata metadata, PathInits inits) {
+    public QUserHistory(Class<? extends UserHistory> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.conference = inits.isInitialized("conference") ? new QConference(forProperty("conference")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
