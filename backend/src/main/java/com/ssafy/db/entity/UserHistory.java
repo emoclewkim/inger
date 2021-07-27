@@ -13,18 +13,18 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User_history extends BaseEntity {
+public class UserHistory extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	User user;
 
 	@ManyToOne
-	@JoinColumn(name = "conference_id", nullable = false)
+	@JoinColumn(name = "conferenceId", nullable = false)
 	Conference conference;
 	
 	Integer type;
-	Date enter_date;
-	Time enter_time;
-	Date exit_date;
-	Time exit_time;
+	Date enterDate;
+	Time enterTime;
+	Date exitDate;
+	Time exitTime;
 }

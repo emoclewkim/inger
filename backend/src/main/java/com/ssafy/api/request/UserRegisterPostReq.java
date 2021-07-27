@@ -12,14 +12,12 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserRegisterPostRequest")
 public class UserRegisterPostReq {
-	@ApiModelProperty(name="유저 ID", example="ssafy_web")
-	String id;
-	@ApiModelProperty(name="유저 Password", example="your_password")
-	String password;
-	@ApiModelProperty(name="유저 Department", example="your_department")
-	String department;
+	@ApiModelProperty(name="카카오 API 서비스 연결 아이디", example="1810000000")
+	String kakaoIdNum;
 	@ApiModelProperty(name="유저 Name", example="your_name")
 	String name;
-	@ApiModelProperty(name="유저 Position", example="your_position")
-	String position;
+	@ApiModelProperty(name="프로필 공개 여부", example="false")
+	Boolean isOpen;
+	@ApiModelProperty(name="카테고리 세부코드", example="201")
+	Integer category;
 }

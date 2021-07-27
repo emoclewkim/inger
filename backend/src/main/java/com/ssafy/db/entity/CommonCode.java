@@ -9,6 +9,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Common_code extends BaseEntity {
+public class CommonCode extends BaseEntity {
 	String kind;
 }
