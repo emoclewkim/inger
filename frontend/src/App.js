@@ -1,8 +1,10 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { createStore } from "redux";
+// import { createStore } from "redux";
 
 import Main from "./pages/Main";
-import Room from './pages/Room'
+import KakaoLogin from "./pages/KakaoLogin";
+import Room from "./pages/Room";
+import Entrance from "./pages/Entrance";
 
 import "./App.css";
 
@@ -11,8 +13,10 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/Main" component={Main} />
+          <Route exact path="/KakaoLogin" component={KakaoLogin} />
           <Route exact path="/room" component={Room} />
+          <Route exact path="/JoinSetting" component={Entrance} />
         </Switch>
       </BrowserRouter>
     </>
