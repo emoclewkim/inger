@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Calender extends BaseEntity {
+public class Calendar extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "userId", nullable = false)
 	User user;
@@ -20,4 +20,5 @@ public class Calender extends BaseEntity {
 	Date date;
 	String promise;
 	String diary;
+
 }
