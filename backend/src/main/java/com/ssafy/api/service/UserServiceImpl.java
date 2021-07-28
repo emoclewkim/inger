@@ -49,13 +49,19 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo) {
 		User user = userRepository.findByKakaoIdNum(kakaoIdNum).get();
-		
+
 		if (user.getId() == null) {
 			return null;
 		}
 		user.setCategory(registerInfo.getCategory());
 		user.setIsOpen(registerInfo.getIsOpen());
 		user.setName(registerInfo.getName());
+		return user;
+	}
+
+	@Override
+	public Optional<User> getUserByName(String name) {
+		Optional<User> user = userRepository.findByName(name);
 		return user;
 	}
 

@@ -12,8 +12,8 @@ import lombok.Setter;
 @Setter
 @ApiModel("AdminRegisterUpdateReq")
 public class AdminRegisterUpdateReq {
-	@ApiModelProperty(name="유저 kakao_idnum")
-	String kakao_idnum;
+	@ApiModelProperty(name="유저 kakaoIdNum")
+	Long id;
 	@ApiModelProperty(name="유저 관련 세부 코드")
-	String usercode;
+	Integer usercode;
 }

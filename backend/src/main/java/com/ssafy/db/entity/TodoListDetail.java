@@ -12,11 +12,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class todoListDetail extends BaseEntity {
+public class TodoListDetail extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "todoId", nullable = false)
 	TodoList todoList;
 
+	Integer detailindex;
 	String detail;
 	Boolean isFinish;
 }
