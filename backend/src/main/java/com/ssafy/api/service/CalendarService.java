@@ -1,9 +1,10 @@
 package com.ssafy.api.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.ssafy.api.request.CalendarRegisterReq;
-import com.ssafy.api.request.CalendarRegisterUpdateReq;
+import com.ssafy.api.request.CalendarUpdateReq;
 import com.ssafy.db.entity.Calendar;
 
 /**
@@ -12,6 +13,7 @@ import com.ssafy.db.entity.Calendar;
 public interface CalendarService {
 	
 	Optional<Calendar> createCalendar(CalendarRegisterReq calendarRegisterReq);
-	Optional<Calendar> getCalendarByUserId(Long userId);
-	Calendar updateCalendarByUserId(Long userId, CalendarRegisterUpdateReq registerInfo);
+	List<Calendar> getCalendarByUserId(Long userId);
+	Calendar modifyCalendar(Long id, CalendarUpdateReq calendarUpdateReq);
+	void deleteCalendarById(Long id);
 }
