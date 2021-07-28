@@ -1,5 +1,6 @@
 package com.ssafy.db.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,8 @@ import com.ssafy.db.entity.Calendar;
  */
 @Repository
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
-	Optional<Calendar> findCalendarByUserId(Long userId);
+	List<Calendar> findByUserId(Long userId);
+	Optional<Calendar> findById(Long id);
+	void deleteById(Long id);
 
 }

@@ -1,16 +1,17 @@
 package com.ssafy.api.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.CalendarRegisterReq;
-import com.ssafy.api.request.CalendarRegisterUpdateReq;
+import com.ssafy.api.request.CalendarUpdateReq;
 import com.ssafy.db.entity.Calendar;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.CalendarRepository;
-import com.ssafy.db.repository.CalendarRepositorySupport;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,13 +21,10 @@ import lombok.RequiredArgsConstructor;
 @Service("calendarService")
 @RequiredArgsConstructor
 public class CalendarServiceImpl implements CalendarService {
-	
+
 	@Autowired
 	CalendarRepository calendarRepository;
-	
-	@Autowired
-	CalendarRepositorySupport calendarRepositorySupport;
-	
+
 	@Override
 	public Optional<Calendar> createCalendar(CalendarRegisterReq calendarRegisterReq) {
 		Calendar calendar = new Calendar();
@@ -40,16 +38,25 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public Optional<Calendar> getCalendarByUserId(Long userId) {
-		Optional<Calendar> calendar = calendarRepositorySupport.findCalendarByUserId(userId);
+	public List<Calendar> getCalendarByUserId(Long id) {
+		List<Calendar> calendar = calendarRepository.findByUserId(id);
 		return calendar;
 	}
 
 	@Override
-	public Calendar updateCalendarByUserId(Long userId, CalendarRegisterUpdateReq registerInfo) {
-		return null;
-	//	Calendar calendar = calendarRepository.findCalendarByUserId(userId);
+	@Transactional
+	public Calendar modifyCalendar(Long id, CalendarUpdateReq calendarUpdateReq) {
+		Calendar calendar = calendarRepository.findById(id).get();
 		
+		calendar.setPromise(calendarUpdateReq.getPromise());
+		calendar.setDiary(calendarUpdateReq.getDiary());
+		return calendar;
+
+	}
+
+	@Override
+	public void deleteCalendarById(Long id) {
+		calendarRepository.deleteById(id);
 	}
 
 }
