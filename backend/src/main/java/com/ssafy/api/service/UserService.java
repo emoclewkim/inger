@@ -19,4 +19,6 @@ public interface UserService {
 	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
 
 	Optional<User> getUserByName(String name);
+	
+	void deleteUserByKakaoIdNum(String kakaoIdNum);
 }
