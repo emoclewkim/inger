@@ -1,7 +1,5 @@
 package com.ssafy.db.entity;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
