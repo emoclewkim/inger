@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 
+import TodolistContainer from '../../../containers/MyTodolistContainer';
 import DrawerProfile from './DrawerProfile';
 import DrawerTodo from './DrawerTodo';
 import DrawerPromise from './DrawerPromise';
 
 import Wrapper from './styles';
 
-const tmpStyle = {
-  border: '1px solid red',
-};
 
 const DrawerContentContainer = ({ drawerId }) => {
   const [contentDiv, setContentDiv] = useState(<DrawerProfile />)
@@ -18,7 +16,11 @@ const DrawerContentContainer = ({ drawerId }) => {
     if (drawerId === 'drawerProfile'){
       setContentDiv(<DrawerProfile />)
     } else if (drawerId === 'drawerTodo') {
-      setContentDiv(<DrawerTodo />)
+      setContentDiv(
+        <TodolistContainer>
+          <DrawerTodo />
+        </TodolistContainer>
+      )
     } else if (drawerId === 'drawerPromise') {
       setContentDiv(<DrawerPromise />)
     } else {
@@ -27,7 +29,7 @@ const DrawerContentContainer = ({ drawerId }) => {
   }, [drawerId])
 
   return (
-    <Wrapper style={tmpStyle}>
+    <Wrapper>
       { contentDiv }
     </Wrapper>
   );

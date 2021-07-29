@@ -1,16 +1,13 @@
 import Wrapper from './styles';
 
 
-const tmpStyle = {
-  border: '1px solid yellow',
-}
+const DrawerTodo = () => {
 
-const DrawerTOdo = () => {
   return (
-    <Wrapper style={tmpStyle}>
-      drawerTodo
+    <Wrapper>
+      TodoList component
     </Wrapper>
-  )
-}
+  );
+};
 
-export default DrawerTOdo
+export default DrawerTodo;
