@@ -24,7 +24,7 @@ public class QTodoList extends EntityPathBase<TodoList> {
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
-    public final DatePath<java.sql.Date> date = createDate("date", java.sql.Date.class);
+    public final DateTimePath<java.util.Date> date = createDateTime("date", java.util.Date.class);
 
     //inherited
     public final NumberPath<Long> id = _super.id;
