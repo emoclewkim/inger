@@ -16,6 +16,8 @@ public interface UserService {
 
 	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
 
+	Optional<User> checkUserByName(String name);
+	
 	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
 
 	Optional<User> getUserByName(String name);
