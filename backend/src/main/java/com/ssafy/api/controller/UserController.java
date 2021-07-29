@@ -41,10 +41,13 @@ public class UserController {
 	@ApiOperation(value = "회원 가입", notes = "<strong>카카오톡으로 로그인하기</strong>를 통해 회원가입 한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<? extends BaseResponseBody> register(
+	public ResponseEntity<Optional<User>> register(
 			@RequestBody @ApiParam(value = "회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
 		Optional<User> user = userService.createUser(registerInfo);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		if(user == null) {
+			ResponseEntity.status(404);
+		}
+		return ResponseEntity.status(200).body(user);
 	}
 	
 	@GetMapping("/checkname/{name}")
@@ -64,12 +67,12 @@ public class UserController {
 	@ApiOperation(value = "회원 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<UserRes> getUserInfo(@PathVariable String kakaoIdNum) {
+	public ResponseEntity<Optional<User>> getUserInfo(@PathVariable String kakaoIdNum) {
 		Optional<User> user = userService.getUserByKakaoIdNum(kakaoIdNum);
 		if (!user.isPresent()) {
 			return ResponseEntity.status(200).body(null);
 		}
-		return ResponseEntity.status(200).body(UserRes.of(user.get()));
+		return ResponseEntity.status(200).body(user);
 	}
 	
 	@GetMapping("/view/{kakaoIdNum}")
