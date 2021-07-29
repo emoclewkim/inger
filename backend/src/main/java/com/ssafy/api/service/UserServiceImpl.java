@@ -71,4 +71,10 @@ public class UserServiceImpl implements UserService {
 	public void deleteUserByKakaoIdNum(String kakaoIdNum) {
 		userRepository.deleteByKakaoIdNum(kakaoIdNum);
 	}
+
+	@Override
+	public Optional<User> checkUserByName(String name) {
+		Optional<User> user = userRepository.findByName(name);
+		return user;
+	}
 }
