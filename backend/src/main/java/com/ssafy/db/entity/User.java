@@ -6,6 +6,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import com.sun.istack.NotNull;
+
 /**
  * 유저 모델 정의.
  */
@@ -14,6 +16,7 @@ import javax.persistence.Entity;
 @Setter
 public class User extends BaseEntity {
 
+	@Column(nullable = false)
 	String kakaoIdNum; // 카카오톡 API 서비스 연결 ID
 	String name;
 
