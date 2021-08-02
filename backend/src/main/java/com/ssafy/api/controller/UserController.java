@@ -73,7 +73,7 @@ public class UserController {
 	public ResponseEntity<Optional<User>> getUserInfo(@PathVariable String kakaoIdNum) {
 		Optional<User> user = userService.getUserByKakaoIdNum(kakaoIdNum);
 		if (!user.isPresent()) {
-			return ResponseEntity.status(200).body(null);
+			return ResponseEntity.status(404).body(null);
 		}
 		return ResponseEntity.status(200).body(user);
 	}
