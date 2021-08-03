@@ -111,6 +111,10 @@ public class UserController {
 		@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 				@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })	
 	public ResponseEntity<BaseResponseBody> deleteUser(@PathVariable String kakaoIdNum) {
+		Optional<User> user = userService.getUserByKakaoIdNum(kakaoIdNum);
+		if(!user.isPresent()) {
+			return ResponseEntity.status(404).body(null);
+		}
 		userService.deleteUserByKakaoIdNum(kakaoIdNum);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
