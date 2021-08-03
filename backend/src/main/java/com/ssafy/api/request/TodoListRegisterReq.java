@@ -1,9 +1,9 @@
 package com.ssafy.api.request;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,13 +14,9 @@ import lombok.Setter;
 @Setter
 @ApiModel("TodoListRegisterReq")
 public class TodoListRegisterReq {
-	@ApiModelProperty(name = "유저 id")
 	Long userId;
-	@ApiModelProperty(name = "todoList 날짜")
 	Date date;
-	@ApiModelProperty(name = "todoList 번호")
 	Integer todoindex;
-	@ApiModelProperty(name = "할 일")
 	String todo;
-
+	List<TodoListDetailRegisterReq> detail;
 }
