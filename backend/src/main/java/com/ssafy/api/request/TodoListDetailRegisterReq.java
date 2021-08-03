@@ -16,10 +16,7 @@ import lombok.Setter;
 @Setter
 @ApiModel("TodoListDetailRegisterReq")
 public class TodoListDetailRegisterReq {
-	@ApiModelProperty(name = "todoList id")
 	Long todoId;
-	@ApiModelProperty(name = "번호")
 	Integer detailindex;
-	@ApiModelProperty(name = "상세정보")
 	String detail;
 }

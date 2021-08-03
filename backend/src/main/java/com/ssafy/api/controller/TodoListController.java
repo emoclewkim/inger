@@ -1,5 +1,6 @@
 package com.ssafy.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import com.ssafy.api.request.TodoListDetailRegisterReq;
 import com.ssafy.api.request.TodoListDetailRegisterUpdateReq;
 import com.ssafy.api.request.TodoListRegisterReq;
 import com.ssafy.api.request.TodoListRegisterUpdateReq;
+import com.ssafy.api.response.TodoListDetailRes;
+import com.ssafy.api.response.TodoListRes;
 import com.ssafy.api.service.TodoListService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.TodoList;
@@ -37,22 +40,29 @@ public class TodoListController {
 
 	@GetMapping("/select/{userId}")
 	@ApiOperation(value = "todoList전체검색", notes = "유저의 id값을 기반으로 todoList 검색")
-	public ResponseEntity<List<TodoList>> getTodoListList(@PathVariable Long userId) {
-		List<TodoList> list = todoListService.selectTodoListList(userId).get();
+	public ResponseEntity<List<TodoListRes>> getTodoListList(@PathVariable Long userId) {
+		List<TodoListRes> todoList = todoListService.selectTodoListList(userId);
 
-		return ResponseEntity.status(200).body(list);
+		return ResponseEntity.status(200).body(todoList);
 	}
 
 	@PostMapping("/create")
 	@ApiOperation(value = "todoList생성", notes = "유저의 id값과 date를 기반으로 todoList 생성")
-	public ResponseEntity<BaseResponseBody> createTodoList(@RequestBody TodoListRegisterReq todoListRegisterReq) {
-		TodoList todoList = todoListService.createTodoList(todoListRegisterReq);
+	public ResponseEntity<BaseResponseBody> createTodoList(@RequestBody List<TodoListRegisterReq> todoList) {
+		int success = 0;
 
-		if (todoList == null) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+		for (TodoListRegisterReq req : todoList) {
+			TodoList todoListReq = todoListService.createTodoList(req);
+			if (todoList != null) {
+				for (TodoListDetailRegisterReq detailReq : req.getDetail()) {
+					detailReq.setTodoId(todoListReq.getId());
+					TodoListDetail detail = todoListService.createDetail(detailReq);
+				}
+				success++;
+			}
 		}
 
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
 	@PatchMapping("/update")
@@ -79,16 +89,16 @@ public class TodoListController {
 		}
 	}
 
-	@GetMapping("/selectDetail/{todoId}")
-	@ApiOperation(value = "todoListDetail검색", notes = "todoList의 id값을 기반으로 todoListDetail 검색")
-	public ResponseEntity<List<TodoListDetail>> getTodoListDetailList(@PathVariable Long todoId) {
-		try {
-			List<TodoListDetail> list = todoListService.selectTodoListDetailList(todoId).get();
-			return ResponseEntity.status(200).body(list);
-		} catch (Exception e) {
-			return ResponseEntity.status(401).body(null);
-		}
-	}
+//	@GetMapping("/selectDetail/{todoId}")
+//	@ApiOperation(value = "todoListDetail검색", notes = "todoList의 id값을 기반으로 todoListDetail 검색")
+//	public ResponseEntity<List<TodoListDetail>> getTodoListDetailList(@PathVariable Long todoId) {
+//		try {
+//			List<TodoListDetail> list = todoListService.selectTodoListDetailList(todoId).get();
+//			return ResponseEntity.status(200).body(list);
+//		} catch (Exception e) {
+//			return ResponseEntity.status(401).body(null);
+//		}
+//	}
 
 	@PostMapping("/createDetail")
 	@ApiOperation(value = "todoListDetail생성", notes = "todoList의 id값을 가지고 todoListDetail 생성")

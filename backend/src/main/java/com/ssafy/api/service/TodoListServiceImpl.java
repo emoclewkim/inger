@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,8 @@ import com.ssafy.api.request.TodoListDetailRegisterReq;
 import com.ssafy.api.request.TodoListDetailRegisterUpdateReq;
 import com.ssafy.api.request.TodoListRegisterReq;
 import com.ssafy.api.request.TodoListRegisterUpdateReq;
+import com.ssafy.api.response.TodoListDetailRes;
+import com.ssafy.api.response.TodoListRes;
 import com.ssafy.db.entity.TodoList;
 import com.ssafy.db.entity.TodoListDetail;
 import com.ssafy.db.entity.User;
@@ -36,8 +39,22 @@ public class TodoListServiceImpl implements TodoListService {
 	TodoListDetailRepository todoListDetailRepository;
 
 	@Override
-	public Optional<List<TodoList>> selectTodoListList(Long userId) {
-		Optional<List<TodoList>> list = todoListRepository.findByUserId(userId);
+	public List<TodoListRes> selectTodoListList(Long userId) {
+		Optional<List<TodoList>> todoList = todoListRepository.findByUserId(userId);
+		List<TodoListRes> list = new ArrayList<TodoListRes>();
+		if (todoList.isPresent()) {
+			for (TodoList todo : todoList.get()) {
+				TodoListRes res = new TodoListRes();
+				res.setId(todo.getId());
+				res.setUserId(todo.getUser().getId());
+				res.setDate(todo.getDate());
+				res.setTodoindex(todo.getTodoindex());
+				res.setTodo(todo.getTodo());
+				res.setIsFinish(todo.getIsFinish());
+				res.setDetail(selectTodoListDetailList(res.getId()));
+				list.add(res);
+			}
+		}
 		return list;
 	}
 
@@ -73,11 +90,23 @@ public class TodoListServiceImpl implements TodoListService {
 	}
 
 	@Override
-	public Optional<List<TodoListDetail>> selectTodoListDetailList(Long todoId) {
+	public List<TodoListDetailRes> selectTodoListDetailList(Long todoId) {
 		try {
 			TodoList todoList = todoListRepository.findById(todoId).get();
 			Optional<List<TodoListDetail>> list = todoListDetailRepository.findByTodoList(todoList);
-			return list;
+			List<TodoListDetailRes> detail = new ArrayList<TodoListDetailRes>();
+			if (list.isPresent()) {
+				List<TodoListDetail> getList = list.get();
+				for (TodoListDetail todoListDetail : getList) {
+					TodoListDetailRes res = new TodoListDetailRes();
+					res.setId(todoListDetail.getId());
+					res.setDetailindex(todoListDetail.getDetailindex());
+					res.setDetail(todoListDetail.getDetail());
+					res.setIsFinish(todoListDetail.getIsFinish());
+					detail.add(res);
+				}
+			}
+			return detail;
 		} catch (Exception e) {
 			return null;
 		}
