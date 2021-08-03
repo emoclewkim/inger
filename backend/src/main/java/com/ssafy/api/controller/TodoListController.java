@@ -104,14 +104,15 @@ public class TodoListController {
 	@PostMapping("/createDetail")
 	@ApiOperation(value = "todoListDetail생성", notes = "todoList의 id값을 가지고 todoListDetail 생성")
 	public ResponseEntity<BaseResponseBody> createDetail(
-			@RequestBody TodoListDetailRegisterReq todoListDetailRegisterReq) {
-		TodoListDetail todoListDetail = todoListService.createDetail(todoListDetailRegisterReq);
-
-		if (todoListDetail == null) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+			@RequestBody List<TodoListDetailRegisterReq> todoListDetailRegisterReq) {
+		int success = 0;
+		for (TodoListDetailRegisterReq req : todoListDetailRegisterReq) {
+			TodoListDetail todoListDetail = todoListService.createDetail(req);
+			if (todoListDetail != null) {
+				success++;
+			}
 		}
-
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success" + success));
 	}
 
 	@PatchMapping("/updateDetail")
