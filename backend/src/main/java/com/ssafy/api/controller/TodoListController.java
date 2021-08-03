@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiOperation;
 public class TodoListController {
 	@Autowired
 	TodoListService todoListService;
-//	git mirror test
+
 	@GetMapping("/select/{userId}")
 	@ApiOperation(value = "todoList전체검색", notes = "유저의 id값을 기반으로 todoList 검색")
 	public ResponseEntity<List<TodoListRes>> getTodoListList(@PathVariable Long userId) {
@@ -53,7 +53,7 @@ public class TodoListController {
 
 		for (TodoListRegisterReq req : todoList) {
 			TodoList todoListReq = todoListService.createTodoList(req);
-			if (todoList != null) {
+			if (todoListReq != null) {
 				for (TodoListDetailRegisterReq detailReq : req.getDetail()) {
 					detailReq.setTodoId(todoListReq.getId());
 					TodoListDetail detail = todoListService.createDetail(detailReq);
@@ -68,14 +68,15 @@ public class TodoListController {
 	@PatchMapping("/update")
 	@ApiOperation(value = "todoList수정", notes = "todoList의 id값을 기반으로 데이터 수정")
 	public ResponseEntity<BaseResponseBody> updateTodoList(
-			@RequestBody TodoListRegisterUpdateReq todoListRegisterUpdateReq) {
-		TodoList todoList = todoListService.updateTodoList(todoListRegisterUpdateReq);
-
-		if (todoList == null) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+			@RequestBody List<TodoListRegisterUpdateReq> todoListRegisterUpdateReq) {
+		int success = 0;
+		for (TodoListRegisterUpdateReq req : todoListRegisterUpdateReq) {
+			TodoList todoList = todoListService.updateTodoList(req);
+			if (todoList != null) {
+				success++;
+			}
 		}
-
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
 	@DeleteMapping("/delete/{id}")
@@ -116,14 +117,16 @@ public class TodoListController {
 	@PatchMapping("/updateDetail")
 	@ApiOperation(value = "todoListDetail수정", notes = "todoListDetail의 id값을 가지고 todoListDetail 수정")
 	public ResponseEntity<BaseResponseBody> updateDteail(
-			@RequestBody TodoListDetailRegisterUpdateReq todoListDetailRegisterUpdateReq) {
-		TodoListDetail todoListDetail = todoListService.updateDetail(todoListDetailRegisterUpdateReq);
-
-		if (todoListDetail == null) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+			@RequestBody List<TodoListDetailRegisterUpdateReq> todoListDetailRegisterUpdateReq) {
+		int success = 0;
+		for (TodoListDetailRegisterUpdateReq req : todoListDetailRegisterUpdateReq) {
+			TodoListDetail todoListDetail = todoListService.updateDetail(req);
+			if (todoListDetail != null) {
+				success++;
+			}
 		}
 
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
 	@DeleteMapping("/deleteDetail/{id}")

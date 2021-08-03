@@ -80,7 +80,8 @@ public class TodoListServiceImpl implements TodoListService {
 		TodoList todoList = todoListRepository.findById(todoListRegisterUpdateReq.getId()).get();
 		todoList.setTodoindex(todoListRegisterUpdateReq.getTodoindex());
 		todoList.setTodo(todoListRegisterUpdateReq.getTodo());
-
+		todoList.setIsFinish(todoListRegisterUpdateReq.getIsFinish());
+		
 		return todoList;
 	}
 
