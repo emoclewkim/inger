@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "유저 API", tags = { "User" })
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController { // ch check
+public class UserController {
 
 	@Autowired
 	UserService userService;
@@ -73,7 +73,7 @@ public class UserController { // ch check
 	public ResponseEntity<Optional<User>> getUserInfo(@PathVariable String kakaoIdNum) {
 		Optional<User> user = userService.getUserByKakaoIdNum(kakaoIdNum);
 		if (!user.isPresent()) {
-			return ResponseEntity.status(404).body(null);
+			return ResponseEntity.status(200).body(null);
 		}
 		return ResponseEntity.status(200).body(user);
 	}
