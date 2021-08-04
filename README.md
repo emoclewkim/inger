@@ -34,24 +34,24 @@
 
 ## 프로젝트 명세
 ### 배포 환경
-- __URL__ : 
-- __배포 여부__ : O / X
-- __접속 가능__ : 접속 가능 / 수정 중
-- __HTTPS 적용__ : O / X
+- __URL__ : http://i5a208.p.ssafy.io:3001/
+- __배포 여부__ : O
+- __접속 가능__ : 수정 중
+- __HTTPS 적용__ : X
 - __PORT__ : // 3rd Party에서 사용하는 포트가 있다면 기입해주세요. <- 기입 후 해당 주석 삭제
 <br>
 
 ### 개발 환경
 #### Front-end / Android
-- __Framework__ : Vue.js / React / Android / Unity
-- __지원 환경__ : Web / Mobile / Web App / Native App
-- __담당자__ : 팀원 A, 팀원 B,
+- __Framework__ : React
+- __지원 환경__ : Web
+- __담당자__ : 김민재, 김하영, 전선규
 <br>
 
 #### Back-end
-- __Framework__ : Spring boot / Node.js / Django / Flask
-- __Database__ : MySQL / MariaDB
-- __담당자__ : 팀원 A, 팀원 B,
+- __Framework__ : Spring boot
+- __Database__ : MySQL
+- __담당자__ : 김영환, 이채하, 임완택
 <br>
 
 #### Design
