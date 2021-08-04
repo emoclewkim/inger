@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.AdminRegisterUpdateReq;
+import com.ssafy.api.request.NotifyRegisterReq;
 import com.ssafy.api.response.AdminGetUserRes;
 import com.ssafy.api.service.AdminService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.CommonCode;
 import com.ssafy.db.entity.DetailsCode;
+import com.ssafy.db.entity.Notify;
 import com.ssafy.db.entity.User;
 
 import io.swagger.annotations.Api;
@@ -134,23 +136,35 @@ public class AdminController {
 	@ApiOperation(value = "detailsCode수정", notes = "해당 id값의 detailsCode의 name을 수정")
 	public ResponseEntity<BaseResponseBody> updateDetailsCode(@PathVariable Long id, @PathVariable String name) {
 		DetailsCode detailsCode = adminService.updateDetailsCodeById(id, name);
-		
+
 		if (detailsCode == null) {
 			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
 		}
 
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
-	
+
 	@DeleteMapping("/deleteDetailsCode/{id}")
 	@ApiOperation(value = "detailsCode삭제", notes = "해당 id값의 detailsCode 삭제")
-	public ResponseEntity<BaseResponseBody> deleteDetailsCode(@PathVariable Long id){
+	public ResponseEntity<BaseResponseBody> deleteDetailsCode(@PathVariable Long id) {
 		try {
 			adminService.deleteDetailsCodeById(id);
 			return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 		} catch (Exception e) {
 			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
 		}
+	}
+
+	@PostMapping("/notify")
+	@ApiOperation(value = "신고 처리", notes = "신고 처리 기록 입력")
+	public ResponseEntity<BaseResponseBody> setNotify(@RequestBody NotifyRegisterReq notifyRegisterReq) {
+		Notify notify = adminService.createNotify(notifyRegisterReq);
+
+		if (notify == null) {
+			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+		}
+
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.ssafy.db.entity;
 
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -18,11 +17,11 @@ public class TodoList extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "userId", nullable = false)
 	User user;
-	
+
 	Date date;
 	Integer todoindex;
 	String todo;
-	
+
 	@Column(columnDefinition = "boolean default false")
 	Boolean isFinish;
 }

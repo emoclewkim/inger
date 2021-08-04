@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.AdminRegisterUpdateReq;
+import com.ssafy.api.request.NotifyRegisterReq;
 import com.ssafy.db.entity.CommonCode;
 import com.ssafy.db.entity.DetailsCode;
+import com.ssafy.db.entity.Notify;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.CommonCodeRepository;
 import com.ssafy.db.repository.DetailsCodeRepository;
+import com.ssafy.db.repository.NotifyRepository;
 import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserRepositorySupport;
 
@@ -32,6 +35,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	DetailsCodeRepository detailsCodeRepository;
+
+	@Autowired
+	NotifyRepository notifyRepository;
 
 	@Autowired
 	UserRepositorySupport userRepositorySupport;
@@ -115,6 +121,20 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteDetailsCodeById(Long id) {
 		detailsCodeRepository.deleteById(id);
+	}
+
+	@Override
+	public Notify createNotify(NotifyRegisterReq notifyRegisterReq) {
+		Optional<User> user = userRepository.findById(notifyRegisterReq.getUserId());
+		if (user.isPresent()) {
+			Notify notify = new Notify();
+			notify.setUser(user.get());
+			notify.setNotifyDate(notifyRegisterReq.getNotifyDate());
+			notify.setReason(notifyRegisterReq.getReason());
+			notify.setHandling(notifyRegisterReq.getHandling());
+			return notifyRepository.save(notify);
+		}
+		return null;
 	}
 
 }
