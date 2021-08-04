@@ -42,7 +42,7 @@
 <br>
 
 ### 개발 환경
-#### Front-end / Android
+#### Front-end
 - __Framework__ : React
 - __지원 환경__ : Web
 - __담당자__ : 김민재, 김하영, 전선규
