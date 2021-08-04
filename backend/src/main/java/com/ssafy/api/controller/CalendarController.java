@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.CalendarRegisterReq;
 import com.ssafy.api.request.CalendarUpdateReq;
-import com.ssafy.api.response.CalendarRes;
-import com.ssafy.api.response.UserRes;
 import com.ssafy.api.service.CalendarService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Calendar;
