@@ -22,9 +22,12 @@ public class QDetailsCode extends EntityPathBase<DetailsCode> {
 
     public static final QDetailsCode detailsCode = new QDetailsCode("detailsCode");
 
+    public final QBaseEntity _super = new QBaseEntity(this);
+
     public final QCommonCode commonCode;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    //inherited
+    public final NumberPath<Long> id = _super.id;
 
     public final StringPath name = createString("name");
 

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ssafy.api.request.AdminRegisterUpdateReq;
+import com.ssafy.api.request.NotifyRegisterReq;
 import com.ssafy.db.entity.CommonCode;
 import com.ssafy.db.entity.DetailsCode;
+import com.ssafy.db.entity.Notify;
 import com.ssafy.db.entity.User;
 
 /**
@@ -21,12 +23,14 @@ public interface AdminService {
 	CommonCode updateCommonCodeById(Long id, String kind);
 
 	void deleteCommonCodeById(Long id);
-	
+
 	Optional<List<DetailsCode>> getDetailsCodeById(Long id);
-	
+
 	DetailsCode createDetailsCode(Long id, String name, Long type);
-	
+
 	DetailsCode updateDetailsCodeById(Long id, String name);
-	
+
 	void deleteDetailsCodeById(Long id);
+
+	Notify createNotify(NotifyRegisterReq notifyRegisterReq);
 }
