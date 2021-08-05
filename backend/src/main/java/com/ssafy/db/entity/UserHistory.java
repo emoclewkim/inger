@@ -3,6 +3,7 @@ package com.ssafy.db.entity;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
