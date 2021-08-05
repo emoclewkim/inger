@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.UserRegisterUpdateReq;
+import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserRepositorySupport;
@@ -27,6 +28,20 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepositorySupport userRepositorySupport;
 
+	@Override
+	public UserRegistRes selectUser(Long id) {
+		Optional<User> user = userRepository.findById(id);
+		UserRegistRes res = new UserRegistRes();
+		res.setMessage("Success");
+		res.setId(user.get().getId());
+		res.setKakaoIdNum(user.get().getKakaoIdNum());
+		res.setName(user.get().getName());
+		res.setIsOpen(user.get().getIsOpen());
+		res.setUsercode(user.get().getUsercode());
+		res.setCategory(user.get().getCategory());
+		return res;		
+	}
+	
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterPostReq) {
 		User user = new User();
@@ -77,4 +92,5 @@ public class UserServiceImpl implements UserService {
 		Optional<User> user = userRepository.findByName(name);
 		return user;
 	}
+	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.UserRegisterUpdateReq;
+import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.api.response.UserRes;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -41,16 +42,18 @@ public class UserController {
 	@ApiOperation(value = "회원 가입", notes = "<strong>카카오톡으로 로그인하기</strong>를 통해 회원가입 한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "카카오 아이디 인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<User> register(
+	public ResponseEntity<UserRegistRes> register(
 			@RequestBody @ApiParam(value = "회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
 		if(registerInfo.getKakaoIdNum() == "") {
 			return ResponseEntity.status(401).body(null);
 		}
 		User user = userService.createUser(registerInfo);
-		if(user == null) {
+		UserRegistRes res = userService.selectUser(user.getId());
+		if(user == null || res == null) {
 			return ResponseEntity.status(404).body(null);
 		}
-		return ResponseEntity.status(200).body(user);
+		return ResponseEntity.status(200).body(res);
+	//	return ResponseEntity.status(200).body(200, "Success", user));
 	}
 	
 	@GetMapping("/checkname/{name}")

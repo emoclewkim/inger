@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.UserRegisterUpdateReq;
+import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.db.entity.User;
 
 /**
@@ -12,15 +13,11 @@ import com.ssafy.db.entity.User;
 
 public interface UserService {
 
+	UserRegistRes selectUser(Long id);
 	User createUser(UserRegisterPostReq userRegisterPostReq);
-
 	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
-
 	Optional<User> checkUserByName(String name);
-	
 	User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo);
-
 	Optional<User> getUserByName(String name);
-	
 	void deleteUserByKakaoIdNum(String kakaoIdNum);
 }
