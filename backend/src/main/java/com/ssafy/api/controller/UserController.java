@@ -53,7 +53,6 @@ public class UserController {
 			return ResponseEntity.status(404).body(null);
 		}
 		return ResponseEntity.status(200).body(res);
-	//	return ResponseEntity.status(200).body(200, "Success", user));
 	}
 	
 	@GetMapping("/checkname/{name}")
@@ -73,12 +72,16 @@ public class UserController {
 	@ApiOperation(value = "회원 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<Optional<User>> getUserInfo(@PathVariable String kakaoIdNum) {
+	public ResponseEntity<UserRegistRes> getUserInfo(@PathVariable String kakaoIdNum) {
 		Optional<User> user = userService.getUserByKakaoIdNum(kakaoIdNum);
-		if (!user.isPresent()) {
+		if(!user.isPresent()) {
 			return ResponseEntity.status(200).body(null);
 		}
-		return ResponseEntity.status(200).body(user);
+		UserRegistRes res = userService.selectUser(user.get().getId());
+		if (res == null) {
+			return ResponseEntity.status(404).body(null);
+		}
+		return ResponseEntity.status(200).body(res);
 	}
 	
 	@GetMapping("/view/{kakaoIdNum}")
@@ -98,15 +101,14 @@ public class UserController {
 	@ApiOperation(value = "회원 본인 정보 수정", notes = "로그인한 회원 본인의 정보를 수정한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<? extends BaseResponseBody> modifyUser(@PathVariable String kakaoIdNum,
+	public ResponseEntity<UserRegistRes> modifyUser(@PathVariable String kakaoIdNum,
 			@RequestBody UserRegisterUpdateReq registerInfo) {
 		User user = userService.updateUserByKakaoIdNum(kakaoIdNum, registerInfo);
-
-		if (user == null) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+		UserRegistRes res = userService.selectUser(user.getId());
+		if (user == null || res == null) {
+			return ResponseEntity.status(401).body(null);
 		}
-
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(res);
 	}
 
 	@DeleteMapping("/{kakaoIdNum}")
