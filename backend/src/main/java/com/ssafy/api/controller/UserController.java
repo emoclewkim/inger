@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.UserRegisterPostReq;
-import com.ssafy.api.request.UserRegisterUpdateReq;
+import com.ssafy.api.request.UserUpdateReq;
 import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.api.response.UserRes;
 import com.ssafy.api.service.UserService;
@@ -102,7 +102,7 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	public ResponseEntity<UserRegistRes> modifyUser(@PathVariable String kakaoIdNum,
-			@RequestBody UserRegisterUpdateReq registerInfo) {
+			@RequestBody UserUpdateReq registerInfo) {
 		User user = userService.updateUserByKakaoIdNum(kakaoIdNum, registerInfo);
 		UserRegistRes res = userService.selectUser(user.getId());
 		if (user == null || res == null) {
