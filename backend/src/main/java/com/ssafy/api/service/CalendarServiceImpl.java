@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.CalendarRegisterReq;
 import com.ssafy.api.request.CalendarUpdateReq;
+import com.ssafy.api.response.CalendarRes;
 import com.ssafy.db.entity.Calendar;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.CalendarRepository;
@@ -44,10 +46,20 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
+	public CalendarRes getCalendarByUserIdAndDate(Long userId, Date date) {
+		Calendar calendar = calendarRepository.findByUserIdAndDate(userId, date);
+		CalendarRes res = new CalendarRes();
+		res.setDate(calendar.getDate());
+		res.setDiary(calendar.getDiary());
+		res.setPromise(calendar.getPromise());
+		return res;
+	}
+
+	@Override
 	@Transactional
 	public Calendar modifyCalendar(Long id, CalendarUpdateReq calendarUpdateReq) {
 		Calendar calendar = calendarRepository.findById(id).get();
-		
+
 		calendar.setPromise(calendarUpdateReq.getPromise());
 		calendar.setDiary(calendarUpdateReq.getDiary());
 		return calendar;

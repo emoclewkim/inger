@@ -1,5 +1,6 @@
 package com.ssafy.api.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,12 @@ public class CalendarController {
 	public ResponseEntity<? extends BaseResponseBody> deleteCalendar(@PathVariable Long id){
 		calendarService.deleteCalendarById(id);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+	
+	@GetMapping("/othersCalender/{name}/{date}")
+	@ApiOperation(value = "다른 회원의 캘린더 조회", notes = "공부방 내 다른 회원의 닉네임과 선택한 날짜를 가지고 그날의 캘린더 조회")
+	public ResponseEntity<BaseResponseBody> getOtherCalender(@PathVariable String name, @PathVariable Date date) {
+		return null;
 	}
 	
 }
