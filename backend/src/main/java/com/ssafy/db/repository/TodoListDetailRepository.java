@@ -13,5 +13,5 @@ import com.ssafy.db.entity.TodoListDetail;
 public interface TodoListDetailRepository extends JpaRepository<TodoListDetail, Long> {
 
 	Optional<List<TodoListDetail>> findByTodoList(TodoList todoList);
-	
+
 }

@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +82,7 @@ public class TodoListServiceImpl implements TodoListService {
 		todoList.setTodoindex(todoListRegisterUpdateReq.getTodoindex());
 		todoList.setTodo(todoListRegisterUpdateReq.getTodo());
 		todoList.setIsFinish(todoListRegisterUpdateReq.getIsFinish());
-		
+
 		return todoList;
 	}
 

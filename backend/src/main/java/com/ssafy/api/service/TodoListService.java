@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public interface TodoListService {
 	TodoList updateTodoList(TodoListRegisterUpdateReq todoListRegisterUpdateReq);
 
 	void deleteTodoList(Long id);
-	
+
 	List<TodoListDetailRes> selectTodoListDetailList(Long todoId);
 
 	TodoListDetail createDetail(TodoListDetailRegisterReq todoListDetailRegisterReq);
