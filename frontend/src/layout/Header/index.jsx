@@ -20,9 +20,14 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Wrapper from './styles';
+import LoginContainer from '../../containers/LoginContainer';
 
 import { withStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
+import { useHistory } from 'react-router';
+
+// tmp
+import { BrightnessLow } from '@material-ui/icons';
 
 const styles = (theme) => ({
   root: {
@@ -37,39 +42,9 @@ const styles = (theme) => ({
   },
 });
 
-// const DialogTitle = withStyles(styles)((props) => {
-//   const { children, classes, onClose, ...other } = props;
-//   return (
-//     <MuiDialogTitle disableTypography className={classes.root} {...other}>
-//       <Typography variant="h6">{children}</Typography>
-//       {onClose ? (
-//         <IconButton
-//           aria-label="close"
-//           className={classes.closeButton}
-//           onClick={onClose}
-//         >
-//           <CloseIcon />
-//         </IconButton>
-//       ) : null}
-//     </MuiDialogTitle>
-//   );
-// });
-
-// const DialogContent = withStyles((theme) => ({
-//   root: {
-//     padding: theme.spacing(2),
-//   },
-// }))(MuiDialogContent);
-
-// const DialogActions = withStyles((theme) => ({
-//   root: {
-//     margin: 0,
-//     padding: theme.spacing(1),
-//   },
-// }))(MuiDialogActions);
-
-const Header = () => {
+const Header = ({ isJoin, isAuth, onLogOutHandler }) => {
   const isTablet = useMediaQuery('(max-width:960px)');
+  const history = useHistory();
 
   const [open, setOpen] = React.useState(false);
 
@@ -78,6 +53,23 @@ const Header = () => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onClickRoom = () => {
+    alert('준비 중입니다.');
+  };
+
+  const onLoginHandler = () => {
+    if (isJoin === false && isAuth === false) {
+      alert('로그인 후 입장 가능합니다.');
+    } else {
+      if (isJoin) {
+        history.push({ pathname: '/joinsetting' });
+      } else {
+        setOpen(false);
+        history.push({ pathname: '/main' });
+      }
+    }
   };
 
   return (
@@ -101,43 +93,39 @@ const Header = () => {
             <Grid item className="title display-none">
               <Grid container justify="center">
                 <Grid item>
-                  {/* <Button
-                    variant="text"
-                    className="display-none header-button"
-                  >
-                    소개
-                  </Button> */}
+                  {/*  소개 */}
                   <IconButton>
                     <InfoIcon htmlColor="white" />
                   </IconButton>
                 </Grid>
 
                 <Grid item>
-                  {/* <Button
-                    variant="text"
-                    className="display-none header-button"
-                  >
-                    마이페이지
-                  </Button> */}
-                  <Link to="/Main">
-                    <IconButton>
-                      <AccountCircleIcon htmlColor="white" />
-                    </IconButton>
-                  </Link>
+                  {/* 마이페이지 */}
+                  {isAuth && !isJoin ? (
+                    <Link to="/Main">
+                      <IconButton>
+                        <AccountCircleIcon htmlColor="white" />
+                      </IconButton>
+                    </Link>
+                  ) : (
+                    <div></div>
+                  )}
                 </Grid>
 
                 <Grid item>
-                  {/* <Button
-                    variant="text"
-                    className="display-none header-button"
-                  >
-                    방
-                  </Button> */}
-                  <Link to="/room">
-                    <IconButton>
+                  {/* 방 입장 */}
+                  {isAuth && !isJoin ? (
+                    <IconButton onClick={onClickRoom}>
                       <MeetingRoomIcon htmlColor="white" />
                     </IconButton>
-                  </Link>
+                  ) : (
+                    // TMP TEST BUTTOn
+                    <Link to="/TESTBUTTON">
+                      <IconButton>
+                        <BrightnessLow htmlColor="white" />
+                      </IconButton>
+                    </Link>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
@@ -145,13 +133,18 @@ const Header = () => {
             <Grid item>
               <Grid container alignItems="center">
                 <Grid item>
-                  {/* <IconButton onClick={handleClickOpen}>
-                    <LockIcon htmlColor="white" />
-                  </IconButton>
+                  {isAuth ? (
+                    <div></div>
+                  ) : (
+                    <IconButton onClick={handleClickOpen}>
+                      <LockIcon htmlColor="white" />
+                    </IconButton>
+                  )}
                   <Dialog
                     onClose={handleClose}
                     aria-labelledby="customized-dialog-title"
                     open={open}
+                    disableBackdropClick="true"
                   >
                     <DialogTitle
                       id="customized-dialog-title"
@@ -160,61 +153,49 @@ const Header = () => {
                       로그인 & 회원가입
                     </DialogTitle>
                     <DialogContent dividers>
-                      <Typography gutterBottom>
-                        Cras mattis consectetur purus sit amet fermentum. Cras
-                        justo odio, dapibus ac facilisis in, egestas eget quam.
-                        Morbi leo risus, porta ac consectetur ac, vestibulum at
-                        eros.
-                      </Typography>
-                      <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl
-                        consectetur et. Vivamus sagittis lacus vel augue laoreet
-                        rutrum faucibus dolor auctor.
-                      </Typography>
-                      <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent
-                        commodo cursus magna, vel scelerisque nisl consectetur
-                        et. Donec sed odio dui. Donec ullamcorper nulla non
-                        metus auctor fringilla.
-                      </Typography>
+                      <LoginContainer />
                     </DialogContent>
-                    <DialogActions>
-                      <Button autoFocus onClick={handleClose} color="primary">
-                        Save changes
+                    <Button onClick={onLoginHandler}>확인</Button>
+                    {/* {isJoin ? (
+                      <Button
+                        onClick={() =>
+                          history.push({ pathname: '/joinsetting' })
+                        }
+                      >
+                        확인
                       </Button>
-                    </DialogActions>
-                  </Dialog> */}
-                  <Link to="/KakaoLogin">
-                    <IconButton>
-                      <LockIcon htmlColor="white" />
-                    </IconButton>
-                  </Link>
+                    ) : (
+                      <Button
+                        onClick={() => history.push({ pathname: '/main' })}
+                      >
+                        확인
+                      </Button>
+                    )} */}
+                  </Dialog>
                 </Grid>
 
                 <Grid item>
-                  {/* <Button
-                    variant="text"
-                    className="display-none header-button"
-                  >
-                    설정
-                  </Button> */}
-                  <Link to="/JoinSetting">
-                    <IconButton>
-                      <SettingsIcon htmlColor="white" />
-                    </IconButton>
-                  </Link>
+                  {/* 멤버 설정 */}
+                  {!isAuth ? (
+                    <div></div>
+                  ) : (
+                    <Link to="/JoinSetting">
+                      <IconButton>
+                        <SettingsIcon htmlColor="white" />
+                      </IconButton>
+                    </Link>
+                  )}
                 </Grid>
 
                 <Grid item>
-                  {/* <Button
-                    variant="text"
-                    className="display-none header-button"
-                  >
-                    로그아웃
-                  </Button> */}
-                  <IconButton>
-                    <LockOpenIcon htmlColor="white" />
-                  </IconButton>
+                  {/* 로그아웃 */}
+                  {!isAuth ? (
+                    <div></div>
+                  ) : (
+                    <IconButton onClick={onLogOutHandler}>
+                      <LockOpenIcon htmlColor="white" />
+                    </IconButton>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
