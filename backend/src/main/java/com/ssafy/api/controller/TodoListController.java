@@ -79,15 +79,19 @@ public class TodoListController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/delete")
 	@ApiOperation(value = "todoList삭제", notes = "해당 id값의 todoList 삭제")
-	public ResponseEntity<BaseResponseBody> deleteTodoList(@PathVariable Long id) {
-		try {
-			todoListService.deleteTodoList(id);
-			return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-		} catch (Exception e) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+	public ResponseEntity<BaseResponseBody> deleteTodoList(@RequestBody List<Long> id) {
+		int success = 0;
+		for (Long req : id) {
+			try {
+				todoListService.deleteTodoList(req);
+				success++;
+			} catch (Exception e) {
+				System.out.println("Fail " + req);
+			}
 		}
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
 //	@GetMapping("/selectDetail/{todoId}")
@@ -130,15 +134,18 @@ public class TodoListController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
-	@DeleteMapping("/deleteDetail/{id}")
+	@DeleteMapping("/deleteDetail")
 	@ApiOperation(value = "todoListDetail삭제", notes = "해당 id값의 todoListDetail을 삭제")
-	public ResponseEntity<BaseResponseBody> deleteDetail(@PathVariable Long id) {
-		try {
-			todoListService.deleteDetail(id);
-			return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-		} catch (Exception e) {
-			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
+	public ResponseEntity<BaseResponseBody> deleteDetail(@RequestBody List<Long> id) {
+		int success = 0;
+		for (Long req : id) {
+			try {
+				todoListService.deleteDetail(req);
+				success++;
+			} catch (Exception e) {
+				System.out.println("Fail " + req);
+			}
 		}
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
-
 }
