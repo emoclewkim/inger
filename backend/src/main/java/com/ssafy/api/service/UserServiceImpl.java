@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.UserRegisterPostReq;
-import com.ssafy.api.request.UserRegisterUpdateReq;
+import com.ssafy.api.request.UserUpdateReq;
 import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.UserRepository;
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User updateUserByKakaoIdNum(String kakaoIdNum, UserRegisterUpdateReq registerInfo) {
+	public User updateUserByKakaoIdNum(String kakaoIdNum, UserUpdateReq registerInfo) {
 		User user = userRepository.findByKakaoIdNum(kakaoIdNum).get();
 
 		if (user.getId() == null) {
