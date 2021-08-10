@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.CalendarRegisterReq;
-import com.ssafy.api.request.CalendarUpdateReq;
+import com.ssafy.api.response.CalendarRes;
 import com.ssafy.api.service.CalendarService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Calendar;
@@ -39,15 +40,25 @@ public class CalendarController {
 	CalendarService calendarService;
 
 	@PostMapping("/regist")
-	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기 등록", notes = "캘린더에 오늘 다짐 및 일기를 등록한다.")
+	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기 등록/수정한다", notes = "캘린더에 오늘 다짐 및 일기를 등록/수정한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 
-	public ResponseEntity<? extends BaseResponseBody> registerCalendar(
+	public ResponseEntity<CalendarRes> registerCalendar(
 			@RequestBody @ApiParam(value = "오늘 메모 정보", required = true) CalendarRegisterReq registerInfo) {
-
+		Long userId = registerInfo.getUserId();
+		Date date = registerInfo.getDate();
+		Optional<Calendar> cal_check = calendarService.getCalendarByUserIdAndDate(userId, date); // 해당 유저, 날짜의 정보값이 있는지
+		if(cal_check.isPresent()) { // 값이 있으면 update
+			Long id = cal_check.get().getId();
+			Optional<Calendar> calendar = calendarService.modifyCalendar(id, registerInfo);
+			CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
+			return ResponseEntity.status(200).body(res);
+		}
+		// 값이 없으면 create
 		Optional<Calendar> calendar = calendarService.createCalendar(registerInfo);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
+		return ResponseEntity.status(200).body(res);
 	}
 
 	@GetMapping("/list/{userId}")
@@ -55,34 +66,34 @@ public class CalendarController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	
-	public ResponseEntity<List<Calendar>> getCalendarInfo(@PathVariable Long userId) {
+	public ResponseEntity<List<CalendarRes>> getCalendarInfo(@PathVariable Long userId) {
 		List<Calendar> calendar = calendarService.getCalendarByUserId(userId);
-		return ResponseEntity.status(200).body(calendar);
+		List<CalendarRes> res = new ArrayList<CalendarRes>();
+		
+		for(Calendar c : calendar) {
+			res.add(calendarService.selectCalendar(c.getId()));
+		}
+		return ResponseEntity.status(200).body(res);
 	}
 	
 	@PatchMapping("/modify/{id}")
 	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기 수정", notes = "캘린더에 오늘 다짐 및 일기를 수정한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
+		@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	
-	public ResponseEntity<? extends BaseResponseBody> modifyCalendar(@PathVariable Long id, @RequestBody CalendarUpdateReq updateInfo) {
-		Calendar calendar = calendarService.modifyCalendar(id, updateInfo);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	public ResponseEntity<CalendarRes> modifyCalendar(@PathVariable Long id, @RequestBody CalendarRegisterReq registerInfo) {
+		Optional<Calendar> calendar = calendarService.modifyCalendar(id, registerInfo);
+		CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
+		return ResponseEntity.status(200).body(res);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기 삭제", notes = "캘린더에 오늘 다짐 및 일기를 삭제한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	public ResponseEntity<? extends BaseResponseBody> deleteCalendar(@PathVariable Long id){
 		calendarService.deleteCalendarById(id);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-	}
-	
-	@GetMapping("/othersCalender/{name}/{date}")
-	@ApiOperation(value = "다른 회원의 캘린더 조회", notes = "공부방 내 다른 회원의 닉네임과 선택한 날짜를 가지고 그날의 캘린더 조회")
-	public ResponseEntity<BaseResponseBody> getOtherCalender(@PathVariable String name, @PathVariable Date date) {
-		return null;
 	}
 	
 }

@@ -14,10 +14,19 @@ import com.ssafy.db.entity.User;
 public interface UserService {
 
 	UserRegistRes selectUser(Long id);
+	
 	User createUser(UserRegisterPostReq userRegisterPostReq);
+	
+	Optional<User> getUserById(Long id);
+	
 	Optional<User> getUserByKakaoIdNum(String kakaoIdNum);
+	
 	Optional<User> checkUserByName(String name);
+	
 	User updateUserByKakaoIdNum(String kakaoIdNum, UserUpdateReq registerInfo);
+	
 	Optional<User> getUserByName(String name);
+	
 	void deleteUserByKakaoIdNum(String kakaoIdNum);
+	
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.CalendarRegisterReq;
-import com.ssafy.api.request.CalendarUpdateReq;
 import com.ssafy.api.response.CalendarRes;
 import com.ssafy.db.entity.Calendar;
 import com.ssafy.db.entity.User;
@@ -36,6 +35,7 @@ public class CalendarServiceImpl implements CalendarService {
 		calendar.setDate(calendarRegisterReq.getDate());
 		calendar.setPromise(calendarRegisterReq.getPromise());
 		calendar.setDiary(calendarRegisterReq.getDiary());
+		calendar.setStudyTime(0);
 		return Optional.ofNullable(calendarRepository.save(calendar));
 	}
 
@@ -46,29 +46,38 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public CalendarRes getCalendarByUserIdAndDate(Long userId, Date date) {
+	public Optional<Calendar> getCalendarByUserIdAndDate(Long userId, Date date) {
 		Calendar calendar = calendarRepository.findByUserIdAndDate(userId, date);
-		CalendarRes res = new CalendarRes();
-		res.setDate(calendar.getDate());
-		res.setDiary(calendar.getDiary());
-		res.setPromise(calendar.getPromise());
-		return res;
+		return Optional.ofNullable(calendar);
 	}
 
 	@Override
 	@Transactional
-	public Calendar modifyCalendar(Long id, CalendarUpdateReq calendarUpdateReq) {
+	public Optional<Calendar> modifyCalendar(Long id, CalendarRegisterReq calendarRegisterReq) {
 		Calendar calendar = calendarRepository.findById(id).get();
-
-		calendar.setPromise(calendarUpdateReq.getPromise());
-		calendar.setDiary(calendarUpdateReq.getDiary());
-		return calendar;
+		calendar.setPromise(calendarRegisterReq.getPromise());
+		calendar.setDiary(calendarRegisterReq.getDiary());
+		return Optional.ofNullable(calendar);
 
 	}
 
 	@Override
 	public void deleteCalendarById(Long id) {
 		calendarRepository.deleteById(id);
+	}
+
+	@Override
+	public CalendarRes selectCalendar(Long id) {
+		Optional<Calendar> calendar = calendarRepository.findById(id);
+		CalendarRes res = new CalendarRes();
+		res.setId(calendar.get().getId());
+		res.setUserid(calendar.get().getUser().getId());
+		res.setDate(calendar.get().getDate());
+		res.setPromise(calendar.get().getPromise());
+		res.setDiary(calendar.get().getDiary());
+		res.setStudyTime(calendar.get().getStudyTime());
+		
+		return res;
 	}
 
 }
