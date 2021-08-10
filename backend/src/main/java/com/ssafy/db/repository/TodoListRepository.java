@@ -14,4 +14,6 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long> {
 
 	Optional<List<TodoList>> findByUserId(Long userId);
 
+	Integer countByUserIdAndDate(Long userId, Date date);
+
 }

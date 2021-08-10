@@ -32,4 +32,8 @@ public interface TodoListService {
 	TodoListDetail updateDetail(TodoListDetailRegisterUpdateReq todoListDetailRegisterUpdateReq);
 
 	void deleteDetail(Long id);
+
+	Integer countTodoList(Long userId, Date date);
+
+	Integer countDetail(Long todoId);
 }

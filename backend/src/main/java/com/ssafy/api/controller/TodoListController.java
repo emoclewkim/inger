@@ -50,13 +50,20 @@ public class TodoListController {
 	@ApiOperation(value = "todoList생성", notes = "유저의 id값과 date를 기반으로 todoList 생성")
 	public ResponseEntity<BaseResponseBody> createTodoList(@RequestBody List<TodoListRegisterReq> todoList) {
 		int success = 0;
+		int todoIndex = 0;
+		int detailIndex = 0;
 
 		for (TodoListRegisterReq req : todoList) {
+			todoIndex = todoListService.countTodoList(req.getUserId(), req.getDate()) + 1;
+			req.setTodoindex(todoIndex);
 			TodoList todoListReq = todoListService.createTodoList(req);
 			if (todoListReq != null) {
+				detailIndex = todoListService.countDetail(todoListReq.getId()) + 1;
 				for (TodoListDetailRegisterReq detailReq : req.getDetail()) {
 					detailReq.setTodoId(todoListReq.getId());
+					detailReq.setDetailindex(detailIndex);
 					TodoListDetail detail = todoListService.createDetail(detailReq);
+					detailIndex++;
 				}
 				success++;
 			}
@@ -110,13 +117,16 @@ public class TodoListController {
 	public ResponseEntity<BaseResponseBody> createDetail(
 			@RequestBody List<TodoListDetailRegisterReq> todoListDetailRegisterReq) {
 		int success = 0;
+		int detailIndex = 0;
 		for (TodoListDetailRegisterReq req : todoListDetailRegisterReq) {
+			detailIndex = todoListService.countDetail(req.getTodoId()) + 1;
+			req.setDetailindex(detailIndex);
 			TodoListDetail todoListDetail = todoListService.createDetail(req);
 			if (todoListDetail != null) {
 				success++;
 			}
 		}
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success" + success));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success " + success));
 	}
 
 	@PatchMapping("/updateDetail")

@@ -146,4 +146,14 @@ public class TodoListServiceImpl implements TodoListService {
 		todoListDetailRepository.deleteById(id);
 	}
 
+	@Override
+	public Integer countTodoList(Long userId, Date date) {
+		return todoListRepository.countByUserIdAndDate(userId, date);
+	}
+
+	@Override
+	public Integer countDetail(Long todoId) {
+		return todoListDetailRepository.countByTodoList(todoListRepository.findById(todoId).get());
+	}
+
 }

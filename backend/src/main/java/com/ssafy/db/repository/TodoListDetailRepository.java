@@ -14,4 +14,6 @@ public interface TodoListDetailRepository extends JpaRepository<TodoListDetail, 
 
 	Optional<List<TodoListDetail>> findByTodoList(TodoList todoList);
 
+	Integer countByTodoList(TodoList todoList);
+
 }
