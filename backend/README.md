@@ -143,6 +143,7 @@ gradle clean build
     │                   ├── NotifyRepository.java
     │                   ├── TodoListDetailRepository.java
     │                   ├── TodoListRepository.java
+    │                   ├── User_conferenceRepository.java
     │                   ├── UserHistoryRepository.java
     │                   ├── UserRepository.java
     │                   └── UserRepositorySupport.java
