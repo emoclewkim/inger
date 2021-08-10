@@ -115,4 +115,4 @@ __자체 제작 산출물__ (필요시 이미지 또는 설명 첨부)
   - __링크__ : https://docs.openvidu.io/en/2.19.0/tutorials/openvidu-insecure-react/
   - __소개__ : 무료 webRTC 소프트웨어
   - __사용 기능__ : 공부방 
-  - __담당자__ : 팀원 A,
+  - __담당자__ : 김영환, 전선규
