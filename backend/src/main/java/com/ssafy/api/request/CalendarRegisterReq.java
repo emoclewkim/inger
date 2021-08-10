@@ -23,5 +23,5 @@ public class CalendarRegisterReq {
 	String promise;
 	@ApiModelProperty(name="오늘의 일기", example="공부하느라 수고했다. 화이팅!")
 	String diary;
-
+	
 }

@@ -24,5 +24,5 @@ public class Calendar extends BaseEntity {
 	Date date;
 	String promise;
 	String diary;
-
+	Integer studyTime;
 }

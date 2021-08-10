@@ -33,6 +33,8 @@ public class QCalendar extends EntityPathBase<Calendar> {
 
     public final StringPath promise = createString("promise");
 
+    public final NumberPath<Integer> studyTime = createNumber("studyTime", Integer.class);
+
     public final QUser user;
 
     public QCalendar(String variable) {

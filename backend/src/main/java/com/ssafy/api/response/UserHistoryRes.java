@@ -19,4 +19,5 @@ public class UserHistoryRes {
 	Time enterTime;
 	Date exitDate;
 	Time exitTime;
+	
 }
