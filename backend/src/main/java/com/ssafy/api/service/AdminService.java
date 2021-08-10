@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.ssafy.api.request.AdminRegisterUpdateReq;
 import com.ssafy.api.request.NotifyRegisterReq;
+import com.ssafy.api.response.DetailsCodeRes;
 import com.ssafy.db.entity.CommonCode;
 import com.ssafy.db.entity.DetailsCode;
 import com.ssafy.db.entity.Notify;
@@ -24,9 +25,9 @@ public interface AdminService {
 
 	void deleteCommonCodeById(Long id);
 
-	Optional<List<DetailsCode>> getDetailsCodeById(Long id);
+	List<DetailsCodeRes> getDetailsCodeById(Long id);
 
-	DetailsCode createDetailsCode(Long id, String name, Long type);
+	DetailsCode createDetailsCode(String name, Long type);
 
 	DetailsCode updateDetailsCodeById(Long id, String name);
 

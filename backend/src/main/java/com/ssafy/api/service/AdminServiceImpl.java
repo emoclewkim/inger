@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.AdminRegisterUpdateReq;
 import com.ssafy.api.request.NotifyRegisterReq;
+import com.ssafy.api.response.DetailsCodeRes;
 import com.ssafy.db.entity.CommonCode;
 import com.ssafy.db.entity.DetailsCode;
 import com.ssafy.db.entity.Notify;
@@ -85,22 +87,26 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Optional<List<DetailsCode>> getDetailsCodeById(Long id) {
+	public List<DetailsCodeRes> getDetailsCodeById(Long id) {
 		CommonCode commonCode = new CommonCode();
 		commonCode.setId(id);
-		Optional<List<DetailsCode>> list = detailsCodeRepository.findByCommonCode(commonCode);
+		Optional<List<DetailsCode>> details = detailsCodeRepository.findByCommonCode(commonCode);
+		List<DetailsCodeRes> list = new ArrayList<DetailsCodeRes>();
+		for (DetailsCode detailsCode : details.get()) {
+			DetailsCodeRes res = new DetailsCodeRes();
+			res.setId(detailsCode.getId());
+			res.setName(detailsCode.getName());
+			res.setType(detailsCode.getCommonCode().getId());
+			list.add(res);
+		}
 		return list;
 	}
 
 	@Override
-	public DetailsCode createDetailsCode(Long id, String name, Long type) {
-		if (detailsCodeRepository.findById(id).isPresent()) {
-			return null;
-		}
+	public DetailsCode createDetailsCode(String name, Long type) {
 		DetailsCode detailsCode = new DetailsCode();
 		CommonCode commonCode = new CommonCode();
 		commonCode.setId(type);
-		detailsCode.setId(id);
 		detailsCode.setName(name);
 		detailsCode.setCommonCode(commonCode);
 		return detailsCodeRepository.save(detailsCode);

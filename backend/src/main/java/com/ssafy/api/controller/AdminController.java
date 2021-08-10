@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.api.request.AdminRegisterUpdateReq;
 import com.ssafy.api.request.NotifyRegisterReq;
 import com.ssafy.api.response.AdminGetUserRes;
+import com.ssafy.api.response.DetailsCodeRes;
 import com.ssafy.api.service.AdminService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -113,17 +114,16 @@ public class AdminController {
 
 	@GetMapping("/getDetailsCodeById/{id}")
 	@ApiOperation(value = "detailsCode조회", notes = "commonCode id값을 받아 해당하는 detailsCode의 목록을 조회")
-	public ResponseEntity<List<DetailsCode>> getDetailsCodeById(@PathVariable Long id) {
-		List<DetailsCode> list = adminService.getDetailsCodeById(id).get();
+	public ResponseEntity<List<DetailsCodeRes>> getDetailsCodeById(@PathVariable Long id) {
+		List<DetailsCodeRes> list = adminService.getDetailsCodeById(id);
 		return ResponseEntity.status(200).body(list);
 
 	}
 
-	@PostMapping("/setDetailsCode/{id}/{name}/{type}")
+	@PostMapping("/setDetailsCode/{name}/{type}")
 	@ApiOperation(value = "detailsCode추가", notes = "DB에 detailsCode를 추가")
-	public ResponseEntity<BaseResponseBody> setDetailsCode(@PathVariable Long id, @PathVariable String name,
-			@PathVariable Long type) {
-		DetailsCode detailsCode = adminService.createDetailsCode(id, name, type);
+	public ResponseEntity<BaseResponseBody> setDetailsCode(@PathVariable String name, @PathVariable Long type) {
+		DetailsCode detailsCode = adminService.createDetailsCode(name, type);
 
 		if (detailsCode == null) {
 			return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Fail"));
