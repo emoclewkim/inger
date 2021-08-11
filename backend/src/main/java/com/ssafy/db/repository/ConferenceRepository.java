@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Long> {
 	List<Conference> findByCategory(Integer category);
+	Conference findBySession(String session);
 }

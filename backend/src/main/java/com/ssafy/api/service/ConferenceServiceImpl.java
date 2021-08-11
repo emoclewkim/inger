@@ -69,11 +69,6 @@ public class ConferenceServiceImpl implements ConferenceService {
 		userHistory.setEnterTime(new Time(now));
 		userHistoryRepository.save(userHistory);
 		
-//		conference.setStartRoomTime(conferenceRegisterReq.getStartRoomTime());
-//		방을 만들때는 퇴장시간 X
-//		conference.setEndRoomDate(conferenceRegisterReq.getEndRoomDate());
-//		conference.setEndRoomTime(sqlTime);
-//		conference.setEndRoomTime(conferenceRegisterReq.getEndRoomTime());
 		return sessionName;
 	}
 
@@ -109,10 +104,34 @@ public class ConferenceServiceImpl implements ConferenceService {
 		return sessionName;
 	}
 
+	//공부방 종료시 nowpeople이 1명 초과면 nowpeople--; 1명이면 현재시간을   end date,time에 입력
+	//해당 user의 userhistory에도 퇴장시간 입력
 	@Override
 	public void exitConference(Long userId, String sessionName) {
+		long now = System.currentTimeMillis();
 		
+		//공부방 종료시간 입력
+		Conference conference=conferenceRepository.findBySession(sessionName);
+		int nowpeople = conference.getNowPeople();
 		
+		if(nowpeople == 1) { // 방이 비면 종료시간 입력
+			conference.setEndRoomDate(new Date(now));
+			conference.setEndRoomTime(new Time(now));
+		}
+		nowpeople--; // 현재인원 1명 감소
+		conference.setNowPeople(nowpeople);
+		conferenceRepository.save(conference); //DB에 저장
+		
+		//유저 히스토리 종료시간 입력
+		List<UserHistory> userHistoryList = userHistoryRepository.findByUserId(userId);
+		for (UserHistory userHistory : userHistoryList) {
+			if(userHistory.getExitDate()==null) { // 종료날짜가 없는 userHistory 찾아서 퇴장시간날짜 입력
+				userHistory.setExitDate(new Date(now));
+				userHistory.setExitTime(new Time(now));
+				userHistoryRepository.save(userHistory);
+				break;
+			}
+		}
 	}
 
 //	@Override
