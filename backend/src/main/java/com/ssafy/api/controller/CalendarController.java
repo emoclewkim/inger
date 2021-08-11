@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.api.request.CalendarRegisterReq;
 import com.ssafy.api.response.CalendarRes;
 import com.ssafy.api.service.CalendarService;
+import com.ssafy.api.service.TimerService;
+import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Calendar;
+import com.ssafy.db.entity.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +40,13 @@ import io.swagger.annotations.ApiResponses;
 public class CalendarController {
 
 	@Autowired
+	UserService userService;
+	
+	@Autowired
 	CalendarService calendarService;
+	
+	@Autowired
+	TimerService timerService;
 
 	@PostMapping("/regist")
 	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기 등록/수정한다", notes = "캘린더에 오늘 다짐 및 일기를 등록/수정한다.")
@@ -57,6 +66,20 @@ public class CalendarController {
 		}
 		// 값이 없으면 create
 		Optional<Calendar> calendar = calendarService.createCalendar(registerInfo);
+		CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
+		return ResponseEntity.status(200).body(res);
+	}
+	
+	@GetMapping("/{userId}/{date}")
+	@ApiOperation(value = "캘린더에 오늘 다짐 및 일기  보기", notes = "캘린더에 저장된 오늘 다짐 및 일기를 본다.")
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
+	public ResponseEntity<CalendarRes> getCalender(@PathVariable Long userId, @PathVariable Date date) {
+		Optional<User> user = userService.getUserById(userId);
+		if(!user.isPresent()) { // 없는 사용자
+			return ResponseEntity.status(404).body(null);
+		}
+		Optional<Calendar> calendar = calendarService.getCalendarByUserIdAndDate(userId, date);
 		CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
 		return ResponseEntity.status(200).body(res);
 	}
