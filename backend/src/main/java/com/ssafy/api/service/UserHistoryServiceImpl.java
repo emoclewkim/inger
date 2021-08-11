@@ -42,18 +42,18 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 	}
 	
 	@Override
-	public Optional<UserHistory> createUserHistory(UserHistoryRegisterReq userHistoryRegisterReq) {
+	public Optional<UserHistory> createUserHistory(Long userId, Long conferenceId) {
 		long now = System.currentTimeMillis();
 		UserHistory userHistory = new UserHistory();
 		User user = new User();
-		user.setId(userHistoryRegisterReq.getUserId());
-		userHistory.setUser(user);
-		
+		user.setId(userId);
+		userHistory.setUser(user);	
+
 		Conference conference = new Conference();
-		conference.setId(userHistoryRegisterReq.getConferenceId());
+		conference.setId(conferenceId);
 		userHistory.setConference(conference);
 		
-		userHistory.setType(userHistoryRegisterReq.getType());
+		userHistory.setType(10);
 		userHistory.setEnterDate(new Date(now));
 		userHistory.setEnterTime(new Time(now));
 		return Optional.ofNullable(userHistoryRepository.save(userHistory));

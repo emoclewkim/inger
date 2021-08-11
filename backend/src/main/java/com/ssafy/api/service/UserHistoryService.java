@@ -12,7 +12,7 @@ import com.ssafy.db.entity.UserHistory;
  */
 public interface UserHistoryService {
 	UserHistoryRes selectUserHistory(Long id);
-	Optional<UserHistory> createUserHistory(UserHistoryRegisterReq userHistoryRegisterReq);
+	Optional<UserHistory> createUserHistory(Long userId, Long conferenceId);
 	Optional<UserHistory> getUserHistoryById(Long id);
 	List<UserHistory> getUserHistoryByUserId(Long userId);
 	Optional<UserHistory> UpdateUserHistory(Long id);
