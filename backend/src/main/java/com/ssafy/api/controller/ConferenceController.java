@@ -52,12 +52,14 @@ public class ConferenceController {
 	
 	
 	
+	//카테고리를 받아와서
 	
-	// 카테고리를 받아와서
 		// 해당하는 방이 없으면 방을 생성후, 세션값 토큰값 리턴 , DB에 해당 방 저장(noewpeople = 1 , maxpeople = 6 , 날짜시간 현재로, 공부방 종료 날짜 종료시간은 null ) 
 		// 해당하는 방이 있고  maxpeople < 6 이라면, 해당 방의 세션값 토큰값 리턴 , DB에 nowpeople값 ++;
 		// 해당하는 방이 있는데 maxpeople == 6 이라면, 새로운방을 만들어서 ? 	
 	
+	//카테고리를 받아와서 
+		// 해당 카테고리에 대한 
 	
 	
 	@GetMapping("/{category}")
