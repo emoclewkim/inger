@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.api.request.CalendarRegisterReq;
 import com.ssafy.api.request.ConferenceRegisterReq;
+import com.ssafy.api.request.UserHistoryRegisterReq;
+import com.ssafy.api.response.UserHistoryRes;
 import com.ssafy.api.service.ConferenceService;
+import com.ssafy.api.service.UserHistoryService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Conference;
+import com.ssafy.db.entity.UserHistory;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,21 +36,35 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/api/v1/conference")
 public class ConferenceController {
+	
 	@Autowired
 	ConferenceService conferenceService;
 	
+	@Autowired
+	UserHistoryService userHistoryService;
+	
 	//입장시
-	@GetMapping("/{category}")
+	@GetMapping("/enterroom/{userId}/{category}")
 	@ApiOperation(value="해당 카테고리에 맞는 입장버튼 클릭",notes ="")
-	public ResponseEntity<Optional<String>> enterConference (@PathVariable Integer category) {
-		Optional<String> sessionName  = conferenceService.getConference(category);
+	
+	public ResponseEntity<Optional<String>> enterConference (@PathVariable Long userId, @PathVariable Integer category) {
+		// 방을 찾아온다.
+		Optional<String> sessionName = conferenceService.getConference(category);
+		if(!sessionName.isPresent()) { // 카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
+			sessionName = conferenceService.createConference(userId, category);
+		} 
+		return ResponseEntity.status(200).body(sessionName);
 		
-		if(!sessionName.isPresent()) { //카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
-			sessionName = conferenceService.createConference(category);
-			return ResponseEntity.status(200).body(sessionName);
-		}else { // 카테고리에 해당하는 방이 있으면
-			return ResponseEntity.status(200).body(sessionName);
-		}
+		//		Optional<UserHistoryRegisterReq> conference  = conferenceService.getConference(registerInfo);
+//	//	UserHistoryRegisterReq uhr = conferenceService.getUserHistory(userId);
+//		Optional<UserHistory> userHistory = userHistoryService.createUserHistory(uhr);
+//		UserHistoryRes res = userHistoryService.selectUserHistory(userHistory.get().getId());
+//		if(!sessionName.isPresent()) { //카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
+//			sessionName = conferenceService.createConference(category);
+//			return ResponseEntity.status(200).body(sessionName);
+//		}else { // 카테고리에 해당하는 방이 있으면
+//			return ResponseEntity.status(200).body(sessionName);
+//		}
 	}
 	
 	// 퇴장시

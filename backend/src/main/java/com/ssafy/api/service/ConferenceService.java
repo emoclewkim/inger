@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.ssafy.api.request.ConferenceRegisterReq;
 import com.ssafy.api.request.ConferenceUpdateReq;
+import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.db.entity.Conference;
 
 /**
@@ -11,10 +12,12 @@ import com.ssafy.db.entity.Conference;
  */
 public interface ConferenceService {
 	//공부방 생성
-	Optional<String> createConference(Integer category);
+	Optional<String> createConference(Long userId, Integer category);
 	
 	//공부방 조회시 카테고리에 해당되는 방을 넘겨준다
 	Optional<String> getConference(Integer category);
+	
+	//
 	
 //	//개인이 기존에 있던 공부방에 입장 퇴장 할때 호출
 //	Conference modifyConference(Long id, Boolean isEnter);
