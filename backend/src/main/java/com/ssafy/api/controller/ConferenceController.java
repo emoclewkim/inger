@@ -23,6 +23,17 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+//import io.openvidu.java.client.*;
+
+//import io.openvidu.java.client.ConnectionProperties;
+//import io.openvidu.java.client.ConnectionType;
+import io.openvidu.java.client.OpenVidu;
+import io.openvidu.java.client.OpenViduHttpException;
+import io.openvidu.java.client.OpenViduJavaClientException;
+import io.openvidu.java.client.OpenViduRole;
+import io.openvidu.java.client.Session;
+
+
 /*
  공부방 관련 요청 처리를 위한 컨트롤러 요청
 */
@@ -33,6 +44,47 @@ public class ConferenceController {
 	@Autowired
 	ConferenceService conferenceService;
 	
+	private OpenVidu openVidu;
+	// URL where our OpenVidu server is listening
+	private String OPENVIDU_URL;
+	// Secret shared with our OpenVidu server
+	private String SECRET;
+	
+	
+	
+	
+	// 카테고리를 받아와서
+		// 해당하는 방이 없으면 방을 생성후, 세션값 토큰값 리턴 , DB에 해당 방 저장(noewpeople = 1 , maxpeople = 6 , 날짜시간 현재로, 공부방 종료 날짜 종료시간은 null ) 
+		// 해당하는 방이 있고  maxpeople < 6 이라면, 해당 방의 세션값 토큰값 리턴 , DB에 nowpeople값 ++;
+		// 해당하는 방이 있는데 maxpeople == 6 이라면, 새로운방을 만들어서 ? 	
+	
+	
+	
+	@GetMapping("/{category}")
+	@ApiOperation(value="해당 카테고리에 맞는 입장버튼 클릭",notes ="")
+	public ResponseEntity<Optional<Conference>> enterConference (@PathVariable Integer category) throws OpenViduJavaClientException, OpenViduHttpException{
+		Optional<Conference> conference = conferenceService.getConference(category);
+		// Build connectionProperties object with the serverData and the role
+//		ConnectionProperties connectionProperties = new ConnectionProperties.Builder().type(ConnectionType.WEBRTC)
+//				.role(role).data(serverData).build();
+		
+		if(conference == null) { // 해당카테고리에 맞는 방이 없으면
+			Session session = this.openVidu.createSession();
+			
+//			String token = session.createConnection(connectionProperties).getToken();
+			
+			return ResponseEntity.status(200).body(conference);
+			
+		}else { // 해당카테고리에 맞는 방이 있으면
+			
+		}
+		
+		return null;
+	}
+	
+	// 퇴장시
+		
+		
 	@PostMapping("/regist")
 	@ApiOperation(value="공부방 생성",notes = "")
 //	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
