@@ -34,32 +34,6 @@ public class UserHistoryController {
 	
 	@Autowired
 	UserHistoryService userHistoryService;
-	
-	@GetMapping("/reststart/{userId}/{conferenceId}")
-	@ApiOperation(value="해당 유저 아이디의 휴식시간 시작",notes ="")
-	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
-		@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<? extends BaseResponseBody> insertEnterTime (@PathVariable Long userId, @PathVariable Long conferenceId) {
-		Optional<UserHistory> uh = userHistoryService.createUserHistory(userId, conferenceId);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-	}
-	
-	@PatchMapping("/restend/{userId}")
-	@ApiOperation(value="해당 유저 아이디의 휴식시간 끝",notes ="")
-	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
-		@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	
-	public ResponseEntity<? extends BaseResponseBody> insertExitTime (@PathVariable Long userId) {
-		List<UserHistory> list = userHistoryService.getUserHistoryByUserId(userId);
-		for(UserHistory uh : list) {
-			if(uh.getType() == 10 && uh.getExitDate() == null && uh.getExitTime() == null) {
-				// 종료 시간 삽입
-				Optional<UserHistory> userHistory = userHistoryService.UpdateUserHistory(uh.getId());
-				return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-			}
-		}
-		return ResponseEntity.status(200).body(BaseResponseBody.of(404, "Fail"));
-	}
 }
 //	@PostMapping("/regist")
 //	@ApiOperation(value="회원 히스토리 생성",notes = "")
