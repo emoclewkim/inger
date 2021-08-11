@@ -25,7 +25,7 @@ public interface AdminService {
 
 	void deleteCommonCodeById(Long id);
 
-	List<DetailsCodeRes> getDetailsCodeById(Long id);
+	List<DetailsCodeRes> getDetailsCodeList();
 
 	DetailsCode createDetailsCode(String name, Long type);
 

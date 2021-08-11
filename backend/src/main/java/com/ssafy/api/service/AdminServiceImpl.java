@@ -87,12 +87,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<DetailsCodeRes> getDetailsCodeById(Long id) {
-		CommonCode commonCode = new CommonCode();
-		commonCode.setId(id);
-		Optional<List<DetailsCode>> details = detailsCodeRepository.findByCommonCode(commonCode);
+	public List<DetailsCodeRes> getDetailsCodeList() {
+		List<DetailsCode> details = detailsCodeRepository.findAll();
 		List<DetailsCodeRes> list = new ArrayList<DetailsCodeRes>();
-		for (DetailsCode detailsCode : details.get()) {
+		for (DetailsCode detailsCode : details) {
 			DetailsCodeRes res = new DetailsCodeRes();
 			res.setId(detailsCode.getId());
 			res.setName(detailsCode.getName());
