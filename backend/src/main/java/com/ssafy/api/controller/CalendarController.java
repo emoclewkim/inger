@@ -80,6 +80,9 @@ public class CalendarController {
 			return ResponseEntity.status(404).body(null);
 		}
 		Optional<Calendar> calendar = calendarService.getCalendarByUserIdAndDate(userId, date);
+		if(!calendar.isPresent()) {
+			return ResponseEntity.status(200).body(null);
+		}
 		CalendarRes res = calendarService.selectCalendar(calendar.get().getId());
 		return ResponseEntity.status(200).body(res);
 	}
