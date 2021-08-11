@@ -54,6 +54,15 @@ public class TimerController {
 	
 	public ResponseEntity<TimerRes> registerTimer(
 			@RequestBody @ApiParam(value = "오늘 메모 정보", required = true) TimerRegisterReq registerInfo) {
+		Long userId = registerInfo.getUserId();
+		Date date = registerInfo.getDate();
+		Optional<Calendar> cal_check = calendarService.getCalendarByUserIdAndDate(userId, date);
+		if(cal_check.isPresent()) { // 값이 있으면 update
+			Long id = cal_check.get().getId();
+			Optional<Calendar> calendar = timerService.modifyTimer(id, registerInfo);
+			TimerRes res = timerService.selectTimer(calendar.get().getId());
+			return ResponseEntity.status(200).body(res);
+		}
 		Optional<Calendar> calendar = timerService.createTimer(registerInfo);
 		TimerRes res = timerService.selectTimer(calendar.get().getId());
 		return ResponseEntity.status(200).body(res);
