@@ -112,10 +112,10 @@ public class AdminController {
 		}
 	}
 
-	@GetMapping("/getDetailsCodeById/{id}")
-	@ApiOperation(value = "detailsCode조회", notes = "commonCode id값을 받아 해당하는 detailsCode의 목록을 조회")
-	public ResponseEntity<List<DetailsCodeRes>> getDetailsCodeById(@PathVariable Long id) {
-		List<DetailsCodeRes> list = adminService.getDetailsCodeById(id);
+	@GetMapping("/getDetailsCodeById")
+	@ApiOperation(value = "detailsCode조회", notes = "DB에 저장되어 있는 detailsCode의 목록을 조회")
+	public ResponseEntity<List<DetailsCodeRes>> getDetailsCodeById() {
+		List<DetailsCodeRes> list = adminService.getDetailsCodeList();
 		return ResponseEntity.status(200).body(list);
 
 	}
