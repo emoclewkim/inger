@@ -53,11 +53,15 @@ public class ConferenceServiceImpl implements ConferenceService {
 		User user = new User();
 		user.setId(userId);
 		userHistory.setUser(user);
-		System.out.println(" ***** " + userHistory.getUser().getId());
+		System.out.println("**********************************************************");
+//		System.out.println(" ***** " + userHistory.getUser().getId());
 		userHistory.setConference(conference);
 		userHistory.setType(9);
 		userHistory.setEnterDate(new Date(now));
 		userHistory.setEnterTime(new Time(now));
+		System.out.println("userId : " + userId);
+		System.out.println(user);
+		System.out.println(userHistory);
 		userHistoryRepository.save(userHistory);
 //		conference.setStartRoomTime(conferenceRegisterReq.getStartRoomTime());
 //		방을 만들때는 퇴장시간 X
