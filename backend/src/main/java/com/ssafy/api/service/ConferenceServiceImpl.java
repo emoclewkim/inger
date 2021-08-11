@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.request.ConferenceRegisterReq;
+import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.db.entity.Conference;
+import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.UserHistory;
 import com.ssafy.db.repository.ConferenceRepository;
+import com.ssafy.db.repository.UserHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,8 +28,11 @@ public class ConferenceServiceImpl implements ConferenceService {
 	@Autowired
 	ConferenceRepository conferenceRepository;
 	
+	@Autowired
+	UserHistoryRepository userHistoryRepository;
+	
 	@Override
-	public Optional<String> createConference(Integer category) {
+	public Optional<String> createConference(Long userId, Integer category) {
 		long now = System.currentTimeMillis();
 		Conference conference = new Conference();
 		
@@ -41,6 +48,21 @@ public class ConferenceServiceImpl implements ConferenceService {
 		conference.setStartRoomTime(new Time(now));
 		conferenceRepository.save(conference); //DB에 저장
 		
+		// UserHistory
+		UserHistory userHistory = new UserHistory();
+		User user = new User();
+		user.setId(userId);
+		userHistory.setUser(user);
+		System.out.println("**********************************************************");
+//		System.out.println(" ***** " + userHistory.getUser().getId());
+		userHistory.setConference(conference);
+		userHistory.setType(9);
+		userHistory.setEnterDate(new Date(now));
+		userHistory.setEnterTime(new Time(now));
+		System.out.println("userId : " + userId);
+		System.out.println(user);
+		System.out.println(userHistory);
+		userHistoryRepository.save(userHistory);
 //		conference.setStartRoomTime(conferenceRegisterReq.getStartRoomTime());
 //		방을 만들때는 퇴장시간 X
 //		conference.setEndRoomDate(conferenceRegisterReq.getEndRoomDate());
@@ -58,7 +80,6 @@ public class ConferenceServiceImpl implements ConferenceService {
 		for (Conference conference : conferenceList) {
 			if(conference.getNowPeople() < 6) { // 리스트에 해당 카테코리에 맞는 6명이하인 공부방이 1개라도 있으면 nowPeople++해주고 해당 공부방의 세션이름을 리턴 
 				sessionName = conference.getSession();
-				
 				int cnt =conference.getNowPeople();
 				conference.setNowPeople(cnt+1); // 인원한명 증가
 				conferenceRepository.save(conference); //DB에 저장
