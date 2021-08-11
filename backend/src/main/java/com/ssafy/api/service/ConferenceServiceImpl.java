@@ -32,13 +32,23 @@ public class ConferenceServiceImpl implements ConferenceService {
 	UserHistoryRepository userHistoryRepository;
 	
 	@Override
-	public Optional<String> createConference(Long userId, Integer category) {
+	public String createConference(Long userId, Integer category) {
 		long now = System.currentTimeMillis();
 		Conference conference = new Conference();
 		
-		//랜덤으로 세션ID 생성
-		UUID uuid = UUID.randomUUID();
+		// 카테고리에 해당되는 방이 있으면 가져옴
+		List<Conference> conferenceList = conferenceRepository.findByCategory(category);
+		int size = conferenceList.size()+1;
+		
+		//랜덤10자리문자 + 카테고리번호 + 해당카테고리에서 몇번째 방인지 카운트수 => sessionName 
 		String sessionName = UUID.randomUUID().toString().replace("-", "");
+		sessionName =sessionName.substring(0, 10);
+		String cat = Integer.toString(category);
+		String siz = Integer.toString(size);
+		
+		System.out.println(sessionName+"   "+cat+"  "+siz);
+		sessionName = sessionName+cat+siz;
+		//ecd5a3d69f1b4d + category + count
 		
 		conference.setCategory(category);
 		conference.setSession(sessionName);
@@ -53,29 +63,26 @@ public class ConferenceServiceImpl implements ConferenceService {
 		User user = new User();
 		user.setId(userId);
 		userHistory.setUser(user);
-		System.out.println("**********************************************************");
-//		System.out.println(" ***** " + userHistory.getUser().getId());
 		userHistory.setConference(conference);
 		userHistory.setType(9);
 		userHistory.setEnterDate(new Date(now));
 		userHistory.setEnterTime(new Time(now));
-		System.out.println("userId : " + userId);
-		System.out.println(user);
-		System.out.println(userHistory);
 		userHistoryRepository.save(userHistory);
+		
 //		conference.setStartRoomTime(conferenceRegisterReq.getStartRoomTime());
 //		방을 만들때는 퇴장시간 X
 //		conference.setEndRoomDate(conferenceRegisterReq.getEndRoomDate());
 //		conference.setEndRoomTime(sqlTime);
 //		conference.setEndRoomTime(conferenceRegisterReq.getEndRoomTime());
-		return Optional.ofNullable(sessionName);
+		return sessionName;
 	}
 
 	@Override
-	public Optional<String> getConference(Integer category) {
+	public String getConference(Long userId, Integer category) {
 		// 카테고리에 해당되는 방이 있으면 가져옴
 		List<Conference> conferenceList = conferenceRepository.findByCategory(category);
 		String sessionName=null; // 초기값 null값으로 두고
+		long now = System.currentTimeMillis();
 		
 		for (Conference conference : conferenceList) {
 			if(conference.getNowPeople() < 6) { // 리스트에 해당 카테코리에 맞는 6명이하인 공부방이 1개라도 있으면 nowPeople++해주고 해당 공부방의 세션이름을 리턴 
@@ -83,10 +90,29 @@ public class ConferenceServiceImpl implements ConferenceService {
 				int cnt =conference.getNowPeople();
 				conference.setNowPeople(cnt+1); // 인원한명 증가
 				conferenceRepository.save(conference); //DB에 저장
+				
+				// UserHistory
+				UserHistory userHistory = new UserHistory();
+				User user = new User();
+				user.setId(userId);
+				userHistory.setUser(user);
+				userHistory.setConference(conference);
+				userHistory.setType(9);
+				userHistory.setEnterDate(new Date(now));
+				userHistory.setEnterTime(new Time(now));
+				userHistoryRepository.save(userHistory);
+				
+				
 				break;
 			}
 		}
-		return Optional.ofNullable(sessionName);
+		return sessionName;
+	}
+
+	@Override
+	public void exitConference(Long userId, String sessionName) {
+		
+		
 	}
 
 //	@Override

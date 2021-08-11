@@ -47,28 +47,22 @@ public class ConferenceController {
 	@GetMapping("/enterroom/{userId}/{category}")
 	@ApiOperation(value="해당 카테고리에 맞는 입장버튼 클릭",notes ="")
 	
-	public ResponseEntity<Optional<String>> enterConference (@PathVariable Long userId, @PathVariable Integer category) {
+	public ResponseEntity<String> enterConference (@PathVariable Long userId, @PathVariable Integer category) {
 		// 방을 찾아온다.
-		Optional<String> sessionName = conferenceService.getConference(category);
-		if(!sessionName.isPresent()) { // 카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
+		String sessionName = conferenceService.getConference(userId,category);
+		if(sessionName == null) { // 카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
 			sessionName = conferenceService.createConference(userId, category);
 		} 
 		return ResponseEntity.status(200).body(sessionName);
-		
-		//		Optional<UserHistoryRegisterReq> conference  = conferenceService.getConference(registerInfo);
-//	//	UserHistoryRegisterReq uhr = conferenceService.getUserHistory(userId);
-//		Optional<UserHistory> userHistory = userHistoryService.createUserHistory(uhr);
-//		UserHistoryRes res = userHistoryService.selectUserHistory(userHistory.get().getId());
-//		if(!sessionName.isPresent()) { //카테고리에 해당하는 방이 없거나 , 6명이하인 방이없거나
-//			sessionName = conferenceService.createConference(category);
-//			return ResponseEntity.status(200).body(sessionName);
-//		}else { // 카테고리에 해당하는 방이 있으면
-//			return ResponseEntity.status(200).body(sessionName);
-//		}
 	}
 	
 	// 퇴장시
-	
+	@GetMapping("/exitroom/{userId}/{sessionName}")
+	@ApiOperation(value="퇴장버튼 클릭",notes="")
+	public ResponseEntity<? extends BaseResponseBody> exitConference(@PathVariable Long userId,@PathVariable String sessionName){
+			conferenceService.exitConference(userId,sessionName);
+			return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
 	
 	
 	
