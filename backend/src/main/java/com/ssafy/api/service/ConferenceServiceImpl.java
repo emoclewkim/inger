@@ -41,14 +41,15 @@ public class ConferenceServiceImpl implements ConferenceService {
 		int size = conferenceList.size()+1;
 		
 		//랜덤10자리문자 + 카테고리번호 + 해당카테고리에서 몇번째 방인지 카운트수 => sessionName 
-		String sessionName = UUID.randomUUID().toString().replace("-", "");
-		sessionName =sessionName.substring(0, 10);
 		String cat = Integer.toString(category);
 		String siz = Integer.toString(size);
+		String sessionName = "R"; 
+		sessionName += UUID.randomUUID().toString().replace("-", "");
+		sessionName = sessionName.substring(0, 11);
 		
-		System.out.println(sessionName+"   "+cat+"  "+siz);
-		sessionName = sessionName+cat+siz;
-		//ecd5a3d69f1b4d + category + count
+		System.out.println(cat+"  "+siz+" "+sessionName);
+		sessionName = cat + siz + sessionName;
+		// category + count + ecd5a3d69f1b4d
 		
 		conference.setCategory(category);
 		conference.setSession(sessionName);
