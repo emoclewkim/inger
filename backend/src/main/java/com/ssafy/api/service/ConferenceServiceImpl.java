@@ -45,7 +45,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 		String siz = Integer.toString(size);
 		String sessionName = "R"; 
 		sessionName += UUID.randomUUID().toString().replace("-", "");
-		sessionName = sessionName.substring(0, 6);
+		sessionName = sessionName.substring(0, 11);
 		
 		System.out.println(cat+"  "+siz+" "+sessionName);
 		sessionName = cat + siz + sessionName;
