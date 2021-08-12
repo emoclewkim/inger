@@ -17,6 +17,9 @@ public interface ConferenceService {
 	//공부방 조회시 카테고리에 해당되는 방을 넘겨준다
 	String getConference(Long userId, Integer category);
 	
+	// userId로 공부방 조회시 현재 회원이 들어가있는 방의 정보를 넘겨준다.
+	Optional<Conference> getConferenceBySession(UserHistoryRegisterReq registerInfo);
+	
 	//공부방 종료시 nowpeople이 1명 초과면 nowpeople--; 1명이면 현재시간을   end date,time에 입력
 	//해당 user의 userhistory에도 퇴장시간 입력
 	void exitConference(Long userId, String sessionName);

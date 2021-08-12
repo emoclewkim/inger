@@ -96,14 +96,18 @@ public class ConferenceServiceImpl implements ConferenceService {
 				userHistory.setEnterDate(new Date(now));
 				userHistory.setEnterTime(new Time(now));
 				userHistoryRepository.save(userHistory);
-				
-				
 				break;
 			}
 		}
 		return sessionName;
 	}
 
+	@Override
+	public Optional<Conference> getConferenceBySession(UserHistoryRegisterReq registerInfo) {
+		Conference conference = conferenceRepository.findBySession(registerInfo.getSession());
+		return Optional.ofNullable(conference); 
+	}
+	
 	//공부방 종료시 nowpeople이 1명 초과면 nowpeople--; 1명이면 현재시간을   end date,time에 입력
 	//해당 user의 userhistory에도 퇴장시간 입력
 	@Override

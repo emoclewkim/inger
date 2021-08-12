@@ -9,13 +9,9 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserHistoryRegisterReq")
 public class UserHistoryRegisterReq {
-	@ApiModelProperty(name="세션 이름", example="kdfsdfldnf")
-	String session;
 	@ApiModelProperty(name="회원 번호", example="1")
 	Long userId;
-	@ApiModelProperty(name="공부방 번호", example="1")
-	Long conferenceId;
-	@ApiModelProperty(name="시간 세부 코드", example="301")
-	Integer type;
+	@ApiModelProperty(name="세션 이름", example="openviduuu11")
+	String session;
 	
 }
