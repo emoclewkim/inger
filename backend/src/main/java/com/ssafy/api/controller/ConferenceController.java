@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.api.request.CalendarRegisterReq;
 import com.ssafy.api.request.ConferenceRegisterReq;
 import com.ssafy.api.request.UserHistoryRegisterReq;
-import com.ssafy.api.response.UserHistoryRes;
 import com.ssafy.api.service.ConferenceService;
 import com.ssafy.api.service.UserHistoryService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -25,7 +23,6 @@ import com.ssafy.db.entity.UserHistory;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -58,31 +55,31 @@ public class ConferenceController {
 	}
 	
 	// 퇴장시
-	@GetMapping("/exitroom/{userId}/{sessionName}")
+	@PatchMapping("/exitroom")
 	@ApiOperation(value="퇴장버튼 클릭",notes="")
-	public ResponseEntity<? extends BaseResponseBody> exitConference(@PathVariable Long userId,@PathVariable String sessionName){
-			conferenceService.exitConference(userId,sessionName);
+	public ResponseEntity<? extends BaseResponseBody> exitConference(@RequestBody ConferenceRegisterReq registerInfo){
+			conferenceService.exitConference(registerInfo.getUserId(),registerInfo.getSession());
 			return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
 	// UserHistory 휴식시간 관련
-	
-	@GetMapping("/reststart/{userId}/{conferenceId}")
+	@PostMapping("/reststart") // 유저 아이디 컨퍼런스 아이디
 	@ApiOperation(value="해당 유저 아이디의 휴식시간 시작",notes ="")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 		@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<? extends BaseResponseBody> insertEnterTime (@PathVariable Long userId, @PathVariable Long conferenceId) {
-		Optional<UserHistory> uh = userHistoryService.createUserHistory(userId, conferenceId);
+	public ResponseEntity<? extends BaseResponseBody> insertEnterTime (@RequestBody UserHistoryRegisterReq registerInfo) {
+		Optional<Conference> conference = conferenceService.getConferenceBySession(registerInfo);
+		Optional<UserHistory> uh = userHistoryService.createUserHistory(registerInfo.getUserId(), conference.get().getId());
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
-	@PatchMapping("/restend/{userId}")
+	@PatchMapping("/restend")
 	@ApiOperation(value="해당 유저 아이디의 휴식시간 끝",notes ="")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 		@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	
-	public ResponseEntity<? extends BaseResponseBody> insertExitTime (@PathVariable Long userId) {
-		List<UserHistory> list = userHistoryService.getUserHistoryByUserId(userId);
+	public ResponseEntity<? extends BaseResponseBody> insertExitTime (@RequestBody UserHistoryRegisterReq registerInfo) {
+		List<UserHistory> list = userHistoryService.getUserHistoryByUserId(registerInfo.getUserId());
 		for(UserHistory uh : list) {
 			if(uh.getType() == 10 && uh.getExitDate() == null && uh.getExitTime() == null) {
 				// 종료 시간 삽입
