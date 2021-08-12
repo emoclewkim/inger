@@ -51,7 +51,7 @@ public class AdminController {
 		Optional<User> user = userService.getUserByName(name);
 
 		if (!user.isPresent()) {
-			return ResponseEntity.status(200).body(null);
+			return ResponseEntity.status(400).body(null);
 		}
 
 		return ResponseEntity.status(200).body(AdminGetUserRes.of(user.get()));
