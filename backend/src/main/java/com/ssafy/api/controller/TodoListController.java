@@ -1,6 +1,5 @@
 package com.ssafy.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import com.ssafy.api.request.TodoListDetailRegisterReq;
 import com.ssafy.api.request.TodoListDetailRegisterUpdateReq;
 import com.ssafy.api.request.TodoListRegisterReq;
 import com.ssafy.api.request.TodoListRegisterUpdateReq;
-import com.ssafy.api.response.TodoListDetailRes;
 import com.ssafy.api.response.TodoListRes;
 import com.ssafy.api.service.TodoListService;
 import com.ssafy.common.model.response.BaseResponseBody;

@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.db.entity.UserHistory;
 
 /**
@@ -14,8 +13,11 @@ import com.ssafy.db.entity.UserHistory;
  */
 @Repository
 public interface UserHistoryRepository extends JpaRepository<UserHistory, Long>{
+	
 	Optional<UserHistory> findById(Long id);
+	
 	List<UserHistory> findByUserId(Long userId);
+	
 	void deleteById(Long id);
 
 }

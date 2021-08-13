@@ -6,8 +6,6 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.sun.istack.NotNull;
-
 /**
  * 유저 모델 정의.
  */

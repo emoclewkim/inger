@@ -1,6 +1,5 @@
 package com.ssafy.api.service;
 
-import java.sql.Date;
 import java.util.Optional;
 
 import com.ssafy.api.request.TimerRegisterReq;
