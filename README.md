@@ -110,7 +110,7 @@ __자체 제작 산출물__ (필요시 이미지 또는 설명 첨부)
   - __소개__ : 카카오에서 제공하는 카카오 소셜 로그인 REST API
   - __사용 기능__ : 카카오 소셜 로그인
   - __담당자__ : 김민재, 이채하
-
+<br>
 - OpenVidu
   - __링크__ : https://docs.openvidu.io/en/2.19.0/tutorials/openvidu-insecure-react/
   - __소개__ : 무료 webRTC 소프트웨어
