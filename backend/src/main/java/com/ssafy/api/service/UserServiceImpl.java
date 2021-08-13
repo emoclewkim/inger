@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		user.setKakaoIdNum(userRegisterPostReq.getKakaoIdNum());
 		user.setName(userRegisterPostReq.getName());
 		user.setIsOpen(userRegisterPostReq.getIsOpen());
-		user.setUsercode(101); // 기본값으로 일반 회원 코드 사용
+		user.setUsercode(1); // 기본값으로 일반 회원 코드 사용
 		user.setCategory(userRegisterPostReq.getCategory());
 		return userRepository.save(user);
 	}
