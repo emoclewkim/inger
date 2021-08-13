@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.api.response.UserHistoryRes;
 import com.ssafy.db.entity.Conference;
 import com.ssafy.db.entity.User;

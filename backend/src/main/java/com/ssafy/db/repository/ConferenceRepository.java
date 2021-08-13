@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.ssafy.db.entity.Conference;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Long> {

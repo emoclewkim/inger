@@ -17,7 +17,6 @@ import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.UserUpdateReq;
 import com.ssafy.api.response.UserRegistRes;
 import com.ssafy.api.response.UserRes;
-import com.ssafy.api.service.CalendarService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.User;

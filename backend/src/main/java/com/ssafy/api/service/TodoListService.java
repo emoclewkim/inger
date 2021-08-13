@@ -2,7 +2,6 @@ package com.ssafy.api.service;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 import com.ssafy.api.request.TodoListDetailRegisterReq;
 import com.ssafy.api.request.TodoListDetailRegisterUpdateReq;

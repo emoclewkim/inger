@@ -3,7 +3,6 @@ package com.ssafy.api.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.api.response.UserHistoryRes;
 import com.ssafy.db.entity.UserHistory;
 

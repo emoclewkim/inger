@@ -28,8 +28,6 @@ import com.ssafy.db.entity.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 /**
  * 관리자 관련 API 요청 처리를 위한 컨트롤러 정의.

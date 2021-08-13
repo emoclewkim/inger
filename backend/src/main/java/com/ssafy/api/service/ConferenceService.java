@@ -2,8 +2,6 @@ package com.ssafy.api.service;
 
 import java.util.Optional;
 
-import com.ssafy.api.request.ConferenceRegisterReq;
-import com.ssafy.api.request.ConferenceUpdateReq;
 import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.db.entity.Conference;
 

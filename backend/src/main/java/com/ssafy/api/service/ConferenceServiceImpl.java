@@ -2,16 +2,12 @@ package com.ssafy.api.service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.ssafy.api.request.ConferenceRegisterReq;
 import com.ssafy.api.request.UserHistoryRegisterReq;
 import com.ssafy.db.entity.Conference;
 import com.ssafy.db.entity.User;
@@ -49,7 +45,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 		
 		System.out.println(cat+"  "+siz+" "+sessionName);
 		sessionName = cat + siz + sessionName;
-		// category + count + ecd5a3d69f1b4d
+		// category + count + Recd5a3d69f
 		
 		conference.setCategory(category);
 		conference.setSession(sessionName);
@@ -77,11 +73,12 @@ public class ConferenceServiceImpl implements ConferenceService {
 	public String getConference(Long userId, Integer category) {
 		// 카테고리에 해당되는 방이 있으면 가져옴
 		List<Conference> conferenceList = conferenceRepository.findByCategory(category);
-		String sessionName=null; // 초기값 null값으로 두고
+		String sessionName = null; // 초기값 null값으로 두고
 		long now = System.currentTimeMillis();
 		
 		for (Conference conference : conferenceList) {
-			if(conference.getNowPeople() < 6) { // 리스트에 해당 카테코리에 맞는 6명이하인 공부방이 1개라도 있으면 nowPeople++해주고 해당 공부방의 세션이름을 리턴 
+			// 리스트에 종료되지 않은 회의 중, 해당 카테코리에 맞는 6명이하인 공부방이 1개라도 있으면 nowPeople++해주고 해당 공부방의 세션이름을 리턴 
+			if(conference.getEndRoomDate() == null && conference.getEndRoomTime() == null && conference.getNowPeople() < 6) { 
 				sessionName = conference.getSession();
 				int cnt =conference.getNowPeople();
 				conference.setNowPeople(cnt+1); // 인원한명 증가
