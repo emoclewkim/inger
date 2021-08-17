@@ -4,9 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.db.entity.Conference;
-import java.util.Optional;
+
+import java.util.List;
 
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Long> {
-
+	List<Conference> findByCategory(Integer category);
+	Conference findBySession(String session);
 }

@@ -1,67 +1,44 @@
-import React from 'react';
 import clsx from 'clsx';
+import { useState } from 'react';
 
-import Screen from '../Screen'
+import DrawerContentContainer from '../DrawerContentContainer';
 
 import { 
   Drawer,
-  Grid,
-  IconButton
+  IconButton,
+  Container,
 } from '@material-ui/core';
 
 import {
-  ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  AccountBox,
+  Assignment,
+  Whatshot,
 } from '@material-ui/icons';
 
-import { useTheme } from '@material-ui/core/styles';
 import { 
   Wrapper,
-  useStyles
 } from './styles';
 
-const RoomDrawer = () => {
-  const classes = useStyles();
-  const theme = useTheme();
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+const RoomDrawer = ({ children, handleDrawerClose, open, classes }) => {
+  const [drawerId, setDrawerId] = useState('drawerProfile');
+  
+  const handleDrawerNo = (e) => {
+    const drawerId = e.currentTarget.id
+    setDrawerId(drawerId)
+  }
 
   return (
     <Wrapper>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <Grid container spacing={3}>
-          {Array(6).fill(1).map( (value, idx) => (
-            <Grid item key={idx} xs={12} sm={6} md={4}>
-              <Screen />
-            </Grid>
-          ))}
-          
-        </Grid>
-        
-      </main>
-      <div className="drawer-button-area">
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="end"
-          onClick={handleDrawerOpen}
-          className={clsx(open && classes.hide)}
+      <Container>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
         >
-          <ChevronLeft className="chevron-left"/>
-        </IconButton>
-      </div>
+        { children }
+        </main>
+      </Container>
 
       <Drawer
         className="drawer"
@@ -71,9 +48,23 @@ const RoomDrawer = () => {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeft /> : <ChevronRight />}
+            <ChevronRight className="chevron-right" />
           </IconButton>
+          <div className="drawerHeader-right-container">
+            <IconButton id="drawerProfile" className="icon-button" onClick={handleDrawerNo}>
+              <AccountBox />
+            </IconButton>
+            <IconButton id="drawerTodo" className="icon-button" onClick={handleDrawerNo}>
+              <Assignment />
+            </IconButton>
+            <IconButton id="drawerPromise" className="icon-button" onClick={handleDrawerNo}>
+              <Whatshot />
+            </IconButton>
+          </div>
         </div>
+        <DrawerContentContainer 
+          drawerId={drawerId}
+        />
       </Drawer>
     </Wrapper>
   );

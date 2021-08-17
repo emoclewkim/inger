@@ -1,6 +1,5 @@
 package com.ssafy.api.response;
 
-import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.User;
 
 import io.swagger.annotations.ApiModel;
@@ -16,16 +15,14 @@ import lombok.Setter;
 @ApiModel("UserResponse")
 public class UserRes{
 	@ApiModelProperty(name="User ID")
-	String userId;
-	String position;
-    String department;
+	Integer category;
+	Boolean isOpen;
 	String name;
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
-//		res.setUserId(user.getUserId());
-//		res.setPosition(user.getPosition());
-//		res.setDepartment(user.getDepartment());
+		res.setCategory(user.getCategory());
+		res.setIsOpen(user.getIsOpen());
 		res.setName(user.getName());
 		return res;
 	}
