@@ -145,7 +145,7 @@
 - :computer:  __Back-End__
 
   - Language
-    - <img src="https://img.shields.io/badge/Java">
+    - <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=007396">
   - Framework / Library
   - Design
   - open API
