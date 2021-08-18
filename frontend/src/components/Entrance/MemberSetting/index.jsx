@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Wrapper from './styles';
 import {
   Button,
@@ -6,18 +6,16 @@ import {
   Container,
   TextField,
   makeStyles,
+  withStyles,
   IconButton,
   Switch,
   FormControlLabel,
-  Box,
 } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
-import CancelIcon from '@material-ui/icons/Cancel';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 
-import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -119,21 +117,12 @@ function MEMBERSETTING({
     setOpen(false);
   };
 
-  const handleSwitchChange = (newValue) => {
-    console.log(newValue);
-    if (newValue === true) {
-      setisOpen(false);
-    } else {
-      setisOpen(true);
-    }
-  };
-
   const categoryName = {
-    201: '수능',
-    202: '취준',
-    203: '자격증',
-    204: '고시',
-    205: '기타',
+    4: '수능',
+    5: '취준',
+    6: '자격증',
+    7: '고시',
+    8: '기타',
   };
 
   const isOpenName = {
@@ -151,7 +140,7 @@ function MEMBERSETTING({
       >
         <Grid container direction="column" className="container">
           <Grid item xs={12}>
-            <div class="title" style={{ fontSize: '36px' }}>
+            <div className="title" style={{ fontSize: '36px' }}>
               회원 정보 입력
             </div>
           </Grid>
@@ -159,7 +148,7 @@ function MEMBERSETTING({
             <Grid
               container
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               xs={12}
             >
@@ -213,14 +202,14 @@ function MEMBERSETTING({
               <Grid
                 container
                 direction="row"
-                justify="center"
+                justifyContent="center"
                 spacing={2}
                 xs={12}
               >
                 <Grid item xs={2}>
                   <Button
-                    class="button"
-                    value="201"
+                    className="button"
+                    value="4"
                     onClick={(e) => {
                       setCategory(e.currentTarget.value);
                     }}
@@ -230,8 +219,8 @@ function MEMBERSETTING({
                 </Grid>
                 <Grid item xs={2}>
                   <Button
-                    class="button"
-                    value="202"
+                    className="button"
+                    value="5"
                     onClick={(e) => {
                       setCategory(e.currentTarget.value);
                     }}
@@ -241,8 +230,8 @@ function MEMBERSETTING({
                 </Grid>
                 <Grid item xs={2}>
                   <Button
-                    class="button"
-                    value="203"
+                    className="button"
+                    value="6"
                     onClick={(e) => {
                       setCategory(e.currentTarget.value);
                     }}
@@ -252,8 +241,8 @@ function MEMBERSETTING({
                 </Grid>
                 <Grid item xs={2}>
                   <Button
-                    class="button"
-                    value="204"
+                    className="button"
+                    value="7"
                     onClick={(e) => {
                       setCategory(e.currentTarget.value);
                     }}
@@ -263,8 +252,8 @@ function MEMBERSETTING({
                 </Grid>
                 <Grid item xs={2}>
                   <Button
-                    class="button"
-                    value="205"
+                    className="button"
+                    value="8"
                     onClick={(e) => {
                       setCategory(e.currentTarget.value);
                     }}
@@ -279,7 +268,7 @@ function MEMBERSETTING({
             <Grid
               container
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               xs={12}
             >
@@ -291,22 +280,14 @@ function MEMBERSETTING({
                 <FormControlLabel
                   control={
                     <Switch
-                      // value={isOpen}
-                      checked={isOpen}
-                      // onChange={handleSwitchChange}
+                      checked={isOpen || ''}
                       onChange={(e) => {
-                        // console.log(e);
                         setisOpen((isOpen) => !isOpen);
                       }}
                       style={{ color: '#E96F02' }}
                     />
                   }
                   labelPlacement="top"
-                  // label={
-                  //   <Box component="div" fontSize={12}>
-                  //     기본 값이 ‘공개’
-                  //   </Box>
-                  // }
                 />
               </Grid>
             </Grid>
@@ -317,7 +298,7 @@ function MEMBERSETTING({
               <Grid
                 container
                 direction="row"
-                justify="center"
+                justifyContent="center"
                 alignItems="center"
                 xs={12}
               >
@@ -346,31 +327,32 @@ function MEMBERSETTING({
                     <DialogTitle
                       id="customized-dialog-title"
                       onClose={handleClose}
+                      style={{
+                        backgroundColor: '#292A33',
+                        color: 'white',
+                      }}
                     >
                       회원 탈퇴
                     </DialogTitle>
-                    <DialogContent dividers>
+                    <DialogContent
+                      dividers
+                      style={{
+                        backgroundColor: '#292A33',
+                        color: 'white',
+                      }}
+                    >
                       <Typography gutterBottom>
                         공부기록 등 그 외 사용자가 설정한 모든 정보가 사라지고,
                         <br></br>
                         복구가 불가능 합니다.
                       </Typography>
-                      {/* <Typography gutterBottom>
-                        그래도 탈퇴하시겠다면,
-                        <br></br>
-                        하단에 아이디를 한 번 더 입력해 주십시오.
-                      </Typography>
-                      <Grid item xs={12}>
-                        <Grid item xs={8}></Grid>
-                        <input
-                          type="text"
-                          style={{
-                            float: 'rignt',
-                          }}
-                        />
-                      </Grid> */}
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions
+                      style={{
+                        backgroundColor: '#292A33',
+                        borderColor: 'white',
+                      }}
+                    >
                       <Button
                         autoFocus
                         onClick={onWithdrawalHandler}
@@ -389,23 +371,14 @@ function MEMBERSETTING({
             <div></div>
           )}
           <Grid item xs={12}>
-            <Grid container direction="row" justify="center" spacing={2}>
+            <Grid container direction="row" justifyContent="center" spacing={2}>
               <Grid item>
-                <IconButton class="check" onClick={onUpdateInfo}>
+                <IconButton className="check" onClick={onUpdateInfo}>
                   <HowToRegIcon />
                 </IconButton>
               </Grid>
-              {/* <Grid item>
-                <IconButton class="cancel">
-                  <CancelIcon />
-                </IconButton>
-              </Grid> */}
             </Grid>
           </Grid>
-          {/* <Grid item xs={12}>
-            <h1>{name}</h1>
-            <h1>{category}</h1>
-          </Grid> */}
         </Grid>
       </Container>
     </Wrapper>

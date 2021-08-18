@@ -6,12 +6,11 @@ const Wrapper = styled.div`
   & .name-container {
     display: flex;
     justify-content: center;
-    margin: 1.3rem 0;
     & .name {
     }
   }
   & .calendar-container {
-    margin: 1rem 1rem 0.7rem 1rem;
+    margin: 0.3rem 0.3rem 0.1rem 0.3rem;
   }
   & .date-time-container {
     text-align: center;
@@ -29,11 +28,17 @@ const Wrapper = styled.div`
   }
   & .pd-container {
     padding: 1rem;
-    height: 300px;
     overflow: auto;
   }
   & .pd-content-container {
-    height: 270px;
+    margin-bottom: 1.5rem;
+  }
+  .textfield-grid {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 30px;
+    width: 100%;
   }
 `;
 
