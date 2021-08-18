@@ -3,7 +3,7 @@
 MySQL
 Java 8+
 Gradle 6.7+
-Eclipse or IntelliJ
+String Tool Suite 3
 
 [Front-end]
 Node 14+
@@ -11,8 +11,8 @@ VS Studio
 
 # mysql 접근
 url: jdbc:mysql://localhost:3306
-username: root
-password: 1234
+username: ssafy
+password: ssafy
 
 # 데이터베이스 생성
 ```sql
@@ -55,15 +55,52 @@ gradle clean build
     │           ├── GroupCallApplication.java
     │           ├── api  /* REST API 요청관련 컨트롤러, 서비스, 요청/응답 모델 정의*/
     │           │   ├── controller
-    │           │   │   ├── AuthController.java
-    │           │   │   └── UserController.java
+    │           │   │   ├── AdminController.java
+    │           │   │   ├── CalendarController.java
+    │           │   │   ├── ConferenceController.java
+    │           │   │   ├── TimerController.java
+    │           │   │   ├── TodoListController.java
+    │           │   │   ├── UserConferenceController.java
+    │           │   │   ├── UserController.java
+    │           │   │   └── UserHistoryController.java
     │           │   ├── request
-    │           │   │   ├── UserLoginPostReq.java
-    │           │   │   └── UserRegisterPostReq.java
+    │           │   │   ├── AdminRegisterUpdateReq.java
+    │           │   │   ├── CalendarRegisterReq.java
+    │           │   │   ├── ConferenceRegisterReq.java
+    │           │   │   ├── ConferenceUpdateReq.java
+    │           │   │   ├── NotifyRegisterReq.java
+    │           │   │   ├── TimeRegisterReq.java
+    │           │   │   ├── TodoListDetailRegisterUpdateReq.java
+    │           │   │   ├── TodoListRegisterReq.java
+    │           │   │   ├── TodoListRegisterUpdateReq.java
+    │           │   │   ├── UserConferenceRegisterReq.java
+    │           │   │   ├── UserHistoryRegisterReq.java
+    │           │   │   ├── UserRegisterPostReq.java
+    │           │   │   └── UserUpdateReq.java
     │           │   ├── response
-    │           │   │   ├── UserLoginPostRes.java
+    │           │   │   ├── AdminGetUserRes.java
+    │           │   │   ├── CalendarRes.java
+    │           │   │   ├── TimerRes.java
+    │           │   │   ├── TodoListDetailRes.java
+    │           │   │   ├── TodoListRes.java
+    │           │   │   ├── UserHistoryRes.java
+    │           │   │   ├── UserRegistRes.java
     │           │   │   └── UserRes.java
     │           │   └── service
+    │           │       ├── AdminService.java
+    │           │       ├── AdminServiceImpl.java
+    │           │       ├── CalendarService.java
+    │           │       ├── CalendarServiceImpl.java
+    │           │       ├── ConferenceService.java
+    │           │       ├── ConferenceServiceImpl.java
+    │           │       ├── TimerService.java
+    │           │       ├── TimerServiceImpl.java
+    │           │       ├── TodoListService.java
+    │           │       ├── TodoListServiceImpl.java
+    │           │       ├── UserConferenceService.java
+    │           │       ├── UserConferenceServiceImpl.java
+    │           │       ├── UserHistoryService.java
+    │           │       ├── UserHistoryServiceImpl.java
     │           │       ├── UserService.java
     │           │       └── UserServiceImpl.java
     │           ├── common /* 공용 유틸, 응답 모델, 인증, 예외처리 관련 정의*/
@@ -88,8 +125,26 @@ gradle clean build
     │           └── db /* 디비에 저장될 모델 정의 및 쿼리 구현 */
     │               ├── entity
     │               │   ├── BaseEntity.java
-    │               │   └── User.java
+    │               │   ├── Calendar.java
+    │               │   ├── CommonCode.java
+    │               │   ├── Conference.java
+    │               │   ├── DetailsCode.java
+    │               │   ├── Notify.java
+    │               │   ├── TodoList.java
+    │               │   ├── TodoListDetail.java
+    │               │   ├── User.java
+    │               │   ├── UserConference.java
+    │               │   └── UserHistory.java
     │               └── repository
+    │                   ├── CalendarRepository.java
+    │                   ├── CommonCodeRepository.java
+    │                   ├── ConferenceRepository.java
+    │                   ├── DetailsCodeRepository.java
+    │                   ├── NotifyRepository.java
+    │                   ├── TodoListDetailRepository.java
+    │                   ├── TodoListRepository.java
+    │                   ├── User_conferenceRepository.java
+    │                   ├── UserHistoryRepository.java
     │                   ├── UserRepository.java
     │                   └── UserRepositorySupport.java
     └── resources
