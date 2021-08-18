@@ -169,6 +169,11 @@
 - __:computer: Back-End__
 
   ```bash
+  cd backend
+  ./gradlew clean build
+  ./gradlew build
+  cd build/libs
+  java -jar skeleton-project-1.0-SNAPSHOT.jar
   ```
 
   
