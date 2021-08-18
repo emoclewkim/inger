@@ -112,41 +112,6 @@
 
 
 
-#### Design
-
-- Framework 사용
-
-   : O / X
-
-  - [Vuetify](https://vuetifyjs.com/)
-  - [Element Plus](https://element-plus.org/)
-
-- **Design Tool 사용** : Adobe XD, Photoshop, Blender, Zeplin 등 (없을 경우 빈칸)
-
-- **담당자** : 팀원 A, 팀원 B,
-
-
-
-### Design Resources
-
-**외부 템플릿 또는 에셋** (이미지 또는 링크 첨부)
-
-- 무료 이미지, 아이콘, 폰트 등은 제외
-
-- Vue Argon Design System
-
-   (무료)
-
-  - **사용 기능** : 디자인 전반 적용
-
-- Vue Black Dashboard Pro
-
-   (유료)
-
-  - **사용 기능** : 캘린더 컴포넌트 사용
-
-
-
 **자체 제작 산출물** (필요시 이미지 또는 설명 첨부)
 
 - Inger LOGO
