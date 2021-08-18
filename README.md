@@ -18,8 +18,8 @@
 
 ## :information_desk_person: 프로젝트 소개
 
-__잉어__는 `webRTC기반 영상 공유 기술을 활용한 온라인 웹 스터디 서비스` 입니다.
-__웹 스터디__는 `온라인 환경에서 자신이 공부하는 모습이나 내용을 공유`하는 서비스입니다.
+**잉어**는 `webRTC기반 영상 공유 기술을 활용한 온라인 웹 스터디 서비스` 입니다.
+**웹 스터디**는 `온라인 환경에서 자신이 공부하는 모습이나 내용을 공유`하는 서비스입니다.
 
  코로나19사태 이후 오프라인에서 다 같이 모여서 공부 할 수 없는 상황이 되며 자택 등 실내에서 혼자 공부를 해야 하는 경우가 이전보다 많아졌습니다. 
 
@@ -71,7 +71,7 @@ __웹 스터디__는 `온라인 환경에서 자신이 공부하는 모습이나
 
 ![record](md-images/record.gif)
 
-> 사용자의 하루 __다짐__과 __일기__, __Todo List__를 작성하여 본인의 계획을 기록 할 수 있습니다.
+> 사용자의 하루 **다짐**과 __일기__, **Todo List**를 작성하여 본인의 계획을 기록 할 수 있습니다.
 >
 >  이 기록은 선택에 따라 같은 공부방에 있는 사람들끼리 `서로 열람 할 수 있어` 관련된 공부를 하고 있는 사람들끼리 도움이 될 수 있습니다.
 >
@@ -175,18 +175,17 @@ __웹 스터디__는 `온라인 환경에서 자신이 공부하는 모습이나
 
 
 
-- __:art: Front-End__
-
+- **:art: Front-End**
   - Language
     - <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
-
+  
   - Framework / Library
     - <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"><img src="https://img.shields.io/badge/redux-6f43b5?style=for-the-badge&logo=redux&logoColor=white"><img src="https://img.shields.io/badge/styled components-d56ead?style=for-the-badge&logo=styled components&logoColor=white">
   - Design
     - <img src="https://img.shields.io/badge/material ui-1976d2?style=for-the-badge&logo=material ui&logoColor=white"> 
   - open API
     - <img src="https://img.shields.io/badge/kakao-fae100?style=for-the-badge&logo=kakao&logoColor=3b1e1e"> 
-
+  
 - :computer:  __Back-End__
 
   - Language
