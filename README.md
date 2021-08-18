@@ -112,15 +112,6 @@
 
 
 
-**자체 제작 산출물** (필요시 이미지 또는 설명 첨부)
-
-- Inger LOGO
-- CardView
-- Button
-- Calendar
-
-
-
 ### 핵심 라이브러리
 
 - Kakao API
