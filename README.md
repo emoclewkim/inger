@@ -156,7 +156,7 @@
 
 
 
-## :hand: Installation
+## 🖐 Installation
 
 - __:art: Front-End__
 
