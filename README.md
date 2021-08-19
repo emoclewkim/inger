@@ -176,4 +176,11 @@
   java -jar skeleton-project-1.0-SNAPSHOT.jar
   ```
 
+
+
+## 🔆 System Architecture : 시스템 아키텍처
+
+![systemarchitecture](md-images/Inger_sa.png)
+
+
   
