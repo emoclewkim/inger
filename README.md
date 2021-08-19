@@ -147,9 +147,7 @@
   - Language
     - <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=black">
   - Framework / Library
-    - <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=green">
-  - Design
-  - open API
+    - <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=green"><img src="https://img.shields.io/badge/JPA-black?style=for-the-badge&logo=JPA&logoColor=white"><img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=black">
 
 - :house_with_garden: __Common__
 
@@ -158,7 +156,7 @@
 
 
 
-## :hand: Installation
+## 🖐 Installation
 
 - __:art: Front-End__
 
@@ -171,6 +169,11 @@
 - __:computer: Back-End__
 
   ```bash
+  cd backend
+  ./gradlew clean build
+  ./gradlew build
+  cd build/libs
+  java -jar skeleton-project-1.0-SNAPSHOT.jar
   ```
 
   
