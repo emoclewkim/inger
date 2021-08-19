@@ -11,7 +11,7 @@
 │   │   ├── inger_background6.png
 │   │   ├── inger.ico
 │   │   └── inger.png
-│	│
+│   │
 ├── src/  
 │   ├── App.css          
 │   ├── App.js           
@@ -19,7 +19,7 @@
 │   │── index.js
 │   │── reportWebVitals.js
 │   │ 
-│   ├── api/   
+│   ├── api/ 							axios요청. 백엔드와 통신.
 │   │   ├── createRequestSaga.js 
 │   │   ├── admin/  
 │   │   │   └── adminSetting.js
@@ -64,7 +64,7 @@
 │   │   │       └── TodolistComponent/
 │   │   │
 │   │   ├── Room/
-│   │   │   ├── Drawer/
+│   │   │   ├── Drawer/ 				다짐, 일기를 부모 컴포넌트와 공유.
 │   │   │   │
 │   │   │   ├── DrawerContentContainer/
 │   │   │   │   ├── DrawerProfile/
@@ -76,12 +76,12 @@
 │   │   │   │
 │   │   │   ├── RoomAppbar/
 │   │   │   │
-│   │   │   ├── Screen/
+│   │   │   ├── Screen/ 				실제 스크린 컴포넌트가 보여지는 영역
 │   │   │   │   ├── Name/
 │   │   │   │   ├── Rest/
 │   │   │   │   └── Timer/
 │   │   │   │
-│   │   │   └── ScreenContainer/
+│   │   │   └── ScreenContainer/		스크린을 담는 컨테이너 영역
 │   │   │
 │   │   └── Webrtc/
 │   │ 
@@ -124,7 +124,7 @@
 │   │   ├── MemberSetting/
 │   │   └── Room/
 │   │ 
-│   └── utils/ 
+│   └── utils/ 							재사용 하는 함수
 │       ├── calendar.js
 │       ├── data.js
 │       ├── event.js
