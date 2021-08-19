@@ -124,12 +124,16 @@
   - **소개** : 무료 webRTC 소프트웨어
   - **사용 기능** : 공부방
   - **담당자** : 김영환, 전선규
+  
+  
+
+## 🔆 System Architecture : 시스템 아키텍처
+
+![systemarchitecture](md-images/Inger_sa.png)
 
 
 
 ## :file_folder: 서비스 아키텍처
-
-
 
 - **:art: Front-End**
   - Language
@@ -158,29 +162,5 @@
 
 ## 🖐 Installation
 
-- __:art: Front-End__
+- [settings](./exec/settings.md) 문서 참조
 
-  ```bash
-  cd frontend
-  npm install
-  npm start
-  ```
-
-- __:computer: Back-End__
-
-  ```bash
-  cd backend
-  ./gradlew clean build
-  ./gradlew build
-  cd build/libs
-  java -jar skeleton-project-1.0-SNAPSHOT.jar
-  ```
-
-
-
-## 🔆 System Architecture : 시스템 아키텍처
-
-![systemarchitecture](md-images/Inger_sa.png)
-
-
-  
