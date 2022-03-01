@@ -119,10 +119,10 @@
   
   
 
-## 🔆 System Architecture : 시스템 아키텍처
+## 🔆 System Architecture : 시스템 아키텍처 , ERD
 
 ![systemarchitecture](md-images/Inger_sa.png)
-
+![스크린샷 2022-03-01 오후 11 30 35](https://user-images.githubusercontent.com/50539439/156187736-c6f1bad3-511d-41f4-91ce-2ac360ba3b41.png)
 
 
 ## :file_folder: 서비스 아키텍처
