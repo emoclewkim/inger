@@ -52,6 +52,7 @@
 
 
 ### :two: 공부방
+![스크린샷 2022-03-01 오후 11 28 46](https://user-images.githubusercontent.com/50539439/156187402-50f09455-6f2d-4cc3-993b-b9b50aa3763d.png)
 
 ![category](md-images/category.gif)
 
